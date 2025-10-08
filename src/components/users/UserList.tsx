@@ -1,19 +1,19 @@
-// src/components/users/AdminList.tsx
+// src/components/users/UserList.tsx
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import AdminCard from "./AdminCard";
-import AddMemberModal from "./AddMemberModal";
+import UserCard from "./UserCard";
+import AddMemberModal from "./AddUserModal";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-type Admin = {
+type User = {
   id: number;
   cabang?: string; // legacy could be branch name or daerah or branch id string
   name: string;
   role: string;
   nomortelepon?: string;
   avatar?: string;
-  email?: string;
+  // email?: string;
   gender?: "male" | "female" | string;
   username?: string;
   password?: string;
@@ -21,12 +21,12 @@ type Admin = {
 
 type Branch = { daerah: string; name: string };
 
-const DATA_URL = "/data/admins.json";
-const SNAP_KEY = "ekatalog_admins_snapshot";
+const DATA_URL = "/data/users.json";
+const SNAP_KEY = "ekatalog_users_snapshot";
 const BRANCH_SNAP = "ekatalog_branches_snapshot";
 
-export default function AdminList() {
-  const [admins, setAdmins] = useState<Admin[]>([]);
+export default function UserList() {
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,15 +43,15 @@ export default function AdminList() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // undo (for admin delete)
+  // undo (for user delete)
   const [lastDeleted, setLastDeleted] = useState<{
-    item: Admin;
+    item: User;
     timeoutId?: number;
   } | null>(null);
 
   // modal add/edit
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalInitial, setModalInitial] = useState<Admin | null>(null);
+  const [modalInitial, setModalInitial] = useState<User | null>(null);
 
   // branches (for cabang select)
   const [branches, setBranches] = useState<Branch[]>([]);
@@ -92,7 +92,7 @@ export default function AdminList() {
   }, []);
 
   // --- snapshot helpers ---
-  function saveSnapshot(list: Admin[]) {
+  function saveSnapshot(list: User[]) {
     try {
       localStorage.setItem(SNAP_KEY, JSON.stringify(list));
     } catch {}
@@ -101,10 +101,10 @@ export default function AdminList() {
 
   async function fetchServerListAndSave() {
     try {
-      const res = await fetch("/api/admins");
+      const res = await fetch("/api/users");
       if (!res.ok) return false;
-      const data = (await res.json()) as Admin[];
-      setAdmins(data);
+      const data = (await res.json()) as User[];
+      setUsers(data);
       saveSnapshot(data);
       return true;
     } catch {
@@ -112,7 +112,7 @@ export default function AdminList() {
     }
   }
 
-  // --- initial load admins ---
+  // --- initial load users ---
   useEffect(() => {
     let cancelled = false;
     async function load() {
@@ -121,16 +121,16 @@ export default function AdminList() {
       try {
         const snapRaw = localStorage.getItem(SNAP_KEY);
         if (snapRaw) {
-          const snap = JSON.parse(snapRaw) as Admin[];
-          if (!cancelled) setAdmins(snap);
+          const snap = JSON.parse(snapRaw) as User[];
+          if (!cancelled) setUsers(snap);
           setLoading(false);
           return;
         }
         const res = await fetch(DATA_URL, { cache: "no-store" });
         if (!res.ok) throw new Error(`Failed to fetch (${res.status})`);
-        const base = (await res.json()) as Admin[];
+        const base = (await res.json()) as User[];
         if (!cancelled) {
-          setAdmins(base);
+          setUsers(base);
           saveSnapshot(base);
         }
       } catch (err: unknown) {
@@ -154,7 +154,7 @@ export default function AdminList() {
       const raw = localStorage.getItem(SNAP_KEY);
       if (!raw) return;
       try {
-        setAdmins(JSON.parse(raw) as Admin[]);
+        setUsers(JSON.parse(raw) as User[]);
       } catch {}
     }
     window.addEventListener("ekatalog:snapshot_update", handler);
@@ -164,14 +164,14 @@ export default function AdminList() {
 
   const roles = useMemo(() => {
     const s = new Set<string>();
-    admins.forEach((a) => s.add(a.role));
+    users.forEach((a) => s.add(a.role));
     return ["All", ...Array.from(s).sort()];
-  }, [admins]);
+  }, [users]);
 
   // filtering (supports cabangFilter by daerah OR branch name OR legacy cabang)
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return admins.filter((a) => {
+    return users.filter((a) => {
       if (cabangFilter !== "All") {
         const selectedDaerah = cabangFilter;
         const branchObj = branches.find(
@@ -195,7 +195,7 @@ export default function AdminList() {
         : false;
       return inName || inPhone || inCabang;
     });
-  }, [admins, roleFilter, search, cabangFilter, branches]);
+  }, [users, roleFilter, search, cabangFilter, branches]);
 
   // pagination + visible slice
   const totalPages =
@@ -249,7 +249,7 @@ export default function AdminList() {
   // API helpers
   async function tryApiDelete(id: number) {
     try {
-      const res = await fetch("/api/admins", {
+      const res = await fetch("/api/users", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
@@ -259,42 +259,42 @@ export default function AdminList() {
       return false;
     }
   }
-  async function tryApiCreate(payload: Omit<Admin, "id">) {
+  async function tryApiCreate(payload: Omit<User, "id">) {
     try {
-      const res = await fetch("/api/admins", {
+      const res = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       if (!res.ok) return null;
-      return (await res.json()) as Admin;
+      return (await res.json()) as User;
     } catch {
       return null;
     }
   }
-  async function tryApiUpdate(payload: Admin) {
+  async function tryApiUpdate(payload: User) {
     try {
-      const res = await fetch("/api/admins", {
+      const res = await fetch("/api/users", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       if (!res.ok) return null;
-      return (await res.json()) as Admin;
+      return (await res.json()) as User;
     } catch {
       return null;
     }
   }
 
-  // prompt delete admin (with confirm)
-  function promptDeleteAdmin(target: Admin) {
-    setConfirmTitle("Hapus Admin");
+  // prompt delete User (with confirm)
+  function promptDeleteUser(target: User) {
+    setConfirmTitle("Hapus User");
     setConfirmDesc(
-      `Yakin ingin menghapus admin "${target.name}"? Aksi ini bisa dibatalkan selama beberapa detik via Undo.`
+      `Yakin ingin menghapus user "${target.name}"? Aksi ini bisa dibatalkan selama beberapa detik via Undo.`
     );
     confirmActionRef.current = async () => {
-      const next = admins.filter((a) => a.id !== target.id);
-      setAdmins(next);
+      const next = users.filter((a) => a.id !== target.id);
+      setUsers(next);
       saveSnapshot(next);
 
       if (lastDeleted?.timeoutId) window.clearTimeout(lastDeleted.timeoutId);
@@ -307,11 +307,11 @@ export default function AdminList() {
     setConfirmOpen(true);
   }
 
-  // undo delete admin
+  // undo delete user
   async function undoDelete() {
     if (!lastDeleted) return;
-    const restored = [...admins, lastDeleted.item].sort((x, y) => x.id - y.id);
-    setAdmins(restored);
+    const restored = [...users, lastDeleted.item].sort((x, y) => x.id - y.id);
+    setUsers(restored);
     saveSnapshot(restored);
     if (lastDeleted.timeoutId) window.clearTimeout(lastDeleted.timeoutId);
     setLastDeleted(null);
@@ -322,7 +322,7 @@ export default function AdminList() {
       cabang: lastDeleted.item.cabang,
       nomortelepon: lastDeleted.item.nomortelepon,
       avatar: lastDeleted.item.avatar,
-      email: lastDeleted.item.email,
+      // email: lastDeleted.item.email,
       gender: lastDeleted.item.gender,
       username: lastDeleted.item.username,
       password: lastDeleted.item.password,
@@ -331,8 +331,8 @@ export default function AdminList() {
   }
 
   // edit modal
-  function openEditModal(admin: Admin) {
-    setModalInitial(admin);
+  function openEditModal(user: User) {
+    setModalInitial(user);
     setModalOpen(true);
   }
 
@@ -394,7 +394,7 @@ export default function AdminList() {
   if (loading)
     return (
       <div className="py-8 text-center text-sm text-gray-500">
-        Loading admins...
+        Loading users...
       </div>
     );
   if (error)
@@ -408,7 +408,7 @@ export default function AdminList() {
     <div ref={containerRef}>
       {/* Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <label className="text-sm text-gray-600">Role</label>
           <select
             value={roleFilter}
@@ -443,11 +443,11 @@ export default function AdminList() {
             onChange={(e) => setPageSize(Number(e.target.value))}
             className="px-3 py-2 border rounded-md text-sm"
           >
+            <option value={0}>All</option>
             <option value={4}>4 per page</option>
             <option value={8}>8 per page</option>
             <option value={12}>12 per page</option>
             <option value={24}>24 per page</option>
-            <option value={0}>All (progressive)</option>
           </select>
         </div>
 
@@ -492,7 +492,7 @@ export default function AdminList() {
             avatarFallback ??
             "/images/avatars/avatar-placeholder.png";
           return (
-            <AdminCard
+            <UserCard
               key={a.id}
               id={a.id}
               name={a.name}
@@ -500,7 +500,7 @@ export default function AdminList() {
               cabang={a.cabang ?? ""}
               nomortelepon={a.nomortelepon ?? ""}
               avatar={avatarSrc}
-              onDelete={() => promptDeleteAdmin(a)}
+              onDelete={() => promptDeleteUser(a)}
               onEdit={() => openEditModal(a)}
             />
           );
@@ -569,13 +569,13 @@ export default function AdminList() {
             Next
           </button>
 
-          <button
+          {/* <button
             onClick={loadMore}
             disabled={endIndex >= filtered.length}
             className="px-3 py-2 rounded-md bg-blue-600 text-white text-sm disabled:opacity-50"
           >
             Load more
-          </button>
+          </button> */}
         </div>
       </div>
 

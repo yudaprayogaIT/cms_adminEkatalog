@@ -5,30 +5,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
-type Admin = {
+type User = {
   id: number;
   name: string;
   role: string;
   cabang?: string;
   nomortelepon?: string;
   avatar?: string;
-  email?: string;
   gender?: 'male' | 'female';
   username?: string;
   password?: string;
 };
 
-const SNAP_KEY = 'ekatalog_admins_snapshot';
+const SNAP_KEY = 'ekatalog_users_snapshot';
 const BRANCH_SNAP = 'ekatalog_branches_snapshot';
 
-type Props = { open: boolean; onClose: () => void; initialData?: Admin | null };
+type Props = { open: boolean; onClose: () => void; initialData?: User | null };
 
 const ROLE_OPTIONS = ['Administrator', 'Marketing', 'Manager Sales', 'SPV Sales', 'Kepala Cabang', 'Sales'];
 
 export default function AddMemberModal({ open, onClose, initialData = null }: Props) {
   const [name, setName] = useState('');
   const [role, setRole] = useState(ROLE_OPTIONS[0]);
-  const [email, setEmail] = useState('');
   const [cabang, setCabang] = useState('');
   const [phone, setPhone] = useState('');
   const [avatar, setAvatar] = useState('/images/avatars/avatarman_placeholder.png');
@@ -67,7 +65,6 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
     if (initialData) {
       setName(initialData.name ?? '');
       setRole(initialData.role ?? ROLE_OPTIONS[0]);
-      setEmail(initialData.email ?? '');
       setCabang(initialData.cabang ?? '');
       setPhone(initialData.nomortelepon ?? '');
       setGender(initialData.gender ?? 'male');
@@ -77,7 +74,6 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
     } else {
       setName('');
       setRole(ROLE_OPTIONS[0]);
-      setEmail('');
       setCabang('');
       setPhone('');
       setGender('male');
@@ -88,6 +84,7 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
   }, [initialData, open]);
 
   useEffect(() => {
+    // avatar default when gender changes (only for new entry or when no custom avatar)
     if (!initialData) {
       setAvatar(gender === 'female' ? '/images/avatars/avatarwoman_placeholder.png' : '/images/avatars/avatarman_placeholder.png');
     } else {
@@ -99,33 +96,33 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
   async function readSnapshotOrBase() {
     const raw = localStorage.getItem(SNAP_KEY);
     if (raw) {
-      try { return JSON.parse(raw) as Admin[]; } catch {}
+      try { return JSON.parse(raw) as User[]; } catch {}
     }
     try {
-      const r = await fetch('/data/admins.json');
-      if (r.ok) return (await r.json()) as Admin[];
+      const r = await fetch('/data/users.json');
+      if (r.ok) return (await r.json()) as User[];
     } catch {}
     return [];
   }
 
-  function saveSnapshot(list: Admin[]) {
+  function saveSnapshot(list: User[]) {
     try { localStorage.setItem(SNAP_KEY, JSON.stringify(list)); } catch {}
     window.dispatchEvent(new Event('ekatalog:snapshot_update'));
   }
 
-  async function callApiCreate(payload: Omit<Admin, 'id'>) {
+  async function callApiCreate(payload: Omit<User, 'id'>) {
     try {
-      const res = await fetch('/api/admins', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch('/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       if (!res.ok) return null;
-      return (await res.json()) as Admin;
+      return (await res.json()) as User;
     } catch { return null; }
   }
 
-  async function callApiUpdate(payload: Admin) {
+  async function callApiUpdate(payload: User) {
     try {
-      const res = await fetch('/api/admins', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch('/api/users', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       if (!res.ok) return null;
-      return (await res.json()) as Admin;
+      return (await res.json()) as User;
     } catch { return null; }
   }
 
@@ -134,13 +131,13 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
     e.preventDefault();
     pendingSaveRef.current = async () => {
       setSaving(true);
-      const payloadNoId = { name: name || 'Unnamed', role, cabang, nomortelepon: phone, avatar, email, gender, username, password };
+      const payloadNoId = { name: name || 'Unnamed', role, cabang, nomortelepon: phone, avatar, gender, username, password };
 
       if (initialData) {
-        const updated: Admin = { ...initialData, ...payloadNoId };
+        const updated: User = { ...initialData, ...payloadNoId };
         const updatedServer = await callApiUpdate(updated);
         if (updatedServer) {
-          try { const r = await fetch('/api/admins'); if (r.ok) saveSnapshot(await r.json()); } catch {}
+          try { const r = await fetch('/api/users'); if (r.ok) saveSnapshot(await r.json()); } catch {}
         } else {
           const list = await readSnapshotOrBase();
           const next = list.map((a) => (a.id === updated.id ? updated : a));
@@ -149,11 +146,11 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
       } else {
         const created = await callApiCreate(payloadNoId);
         if (created) {
-          try { const r = await fetch('/api/admins'); if (r.ok) saveSnapshot(await r.json()); } catch {}
+          try { const r = await fetch('/api/users'); if (r.ok) saveSnapshot(await r.json()); } catch {}
         } else {
           const list = await readSnapshotOrBase();
           const maxId = list.reduce((m, it) => Math.max(m, it.id ?? 0), 0);
-          const nextItem: Admin = { id: maxId + 1, ...payloadNoId };
+          const nextItem: User = { id: maxId + 1, ...payloadNoId };
           list.push(nextItem);
           saveSnapshot(list);
         }
@@ -181,9 +178,22 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
   return (
     <AnimatePresence>
       {open && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        // give explicit key so AnimatePresence can track this element
+        <motion.div
+          key="modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
           <div className="absolute inset-0 bg-black/30" onClick={onClose} />
-          <motion.div initial={{ y: -8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -8, opacity: 0 }} transition={{ duration: 0.16 }} className="bg-white rounded-xl shadow-lg w-full max-w-[900px] p-6 z-10">
+          <motion.div
+            initial={{ y: -8, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -8, opacity: 0 }}
+            transition={{ duration: 0.16 }}
+            className="bg-white rounded-xl shadow-lg w-full max-w-[900px] p-6 z-10"
+          >
             <div className="mb-4">
               <h3 className="text-lg font-medium">{initialData ? 'Edit User' : 'Add New User'}</h3>
               <p className="text-sm text-gray-500">Isi data user. Kamu akan diminta konfirmasi sebelum menyimpan.</p>
@@ -213,7 +223,12 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
                 <label className="text-xs text-gray-600">Cabang</label>
                 <select value={cabang} onChange={(e) => setCabang(e.target.value)} className="w-full px-3 py-2 border rounded mt-1 text-sm">
                   <option value=''>-- Pilih Cabang --</option>
-                  {branches.map((b) => <option key={b.daerah} value={String(b.daerah)}>{(b.daerah || '').replace(/\b\w/g, (c) => c.toUpperCase())} - {(b.name || '').replace(/\b\w/g, (c) => c.toUpperCase())}</option>)}
+                  {branches.map((b, i) => (
+                    // use unique key: daerah + index (handles empty or duplicate daerah)
+                    <option key={`${b.daerah ?? 'branch'}-${i}`} value={String(b.daerah)}>
+                      {(b.daerah || '').replace(/\b\w/g, (c) => c.toUpperCase())} - {(b.name || '').replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -223,11 +238,6 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-xs text-gray-600">Email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 border rounded mt-1 text-sm" placeholder="Enter email" />
               </div>
 
               <div>
@@ -254,7 +264,9 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
         </motion.div>
       )}
 
+      {/* give explicit key for confirm dialog too */}
       <ConfirmDialog
+        key="confirm"
         open={confirmOpen}
         title={initialData ? 'Simpan Perubahan?' : 'Tambah User?'}
         description={initialData ? 'Simpan perubahan pada user ini?' : 'Yakin ingin menambahkan user baru?'}

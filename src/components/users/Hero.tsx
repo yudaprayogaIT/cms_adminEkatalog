@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import AddMemberModal from './AddMemberModal';
+import AddMemberModal from './AddUserModal';
 
 export default function Hero() {
   const [open, setOpen] = useState(false);

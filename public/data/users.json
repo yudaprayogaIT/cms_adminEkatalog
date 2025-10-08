@@ -6,7 +6,6 @@
     "cabang": "Bogor",
     "nomortelepon": "08111111111",
     "avatar": "/images/avatars/1.png",
-    "email": "",
     "gender": "male",
     "username": "",
     "password": ""
@@ -18,7 +17,6 @@
     "cabang": "Bogor",
     "nomortelepon": "08222222222",
     "avatar": "/images/avatars/2.png",
-    "email": "",
     "gender": "male",
     "username": "",
     "password": ""
@@ -30,7 +28,6 @@
     "cabang": "Bogor",
     "nomortelepon": "0833333333",
     "avatar": "/images/avatars/3.png",
-    "email": "",
     "gender": "male",
     "username": "",
     "password": ""
@@ -41,7 +38,10 @@
     "role": "SPV Sales",
     "cabang": "Bogor",
     "nomortelepon": "08444444444",
-    "avatar": "/images/avatars/4.png"
+    "avatar": "/images/avatars/4.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 5,
@@ -49,7 +49,10 @@
     "role": "Manager Sales",
     "cabang": "Medan",
     "nomortelepon": "0855555555555",
-    "avatar": "/images/avatars/5.png"
+    "avatar": "/images/avatars/5.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 6,
@@ -57,7 +60,10 @@
     "role": "Kepala Cabang",
     "cabang": "Medan",
     "nomortelepon": "08666666666",
-    "avatar": "/images/avatars/6.png"
+    "avatar": "/images/avatars/6.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 7,
@@ -66,7 +72,6 @@
     "cabang": "Sidoarjo",
     "nomortelepon": "08777777777",
     "avatar": "/images/avatars/7.png",
-    "email": "",
     "gender": "male",
     "username": "",
     "password": ""
@@ -77,7 +82,10 @@
     "role": "Sales",
     "cabang": "Sidoarjo",
     "nomortelepon": "08888888888",
-    "avatar": "/images/avatars/8.png"
+    "avatar": "/images/avatars/8.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 9,
@@ -85,7 +93,10 @@
     "role": "Kepala Cabang",
     "cabang": "Palembang",
     "nomortelepon": "08999999999",
-    "avatar": "/images/avatars/9.png"
+    "avatar": "/images/avatars/9.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 10,
@@ -93,7 +104,10 @@
     "role": "Sales",
     "cabang": "Palembang",
     "nomortelepon": "08101010101",
-    "avatar": "/images/avatars/10.png"
+    "avatar": "/images/avatars/10.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 11,
@@ -101,7 +115,10 @@
     "role": "Kepala Cabang",
     "cabang": "Klaten",
     "nomortelepon": "08811111111",
-    "avatar": "/images/avatars/11.png"
+    "avatar": "/images/avatars/11.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 12,
@@ -109,7 +126,10 @@
     "role": "Sales",
     "cabang": "Klaten",
     "nomortelepon": "08822222222",
-    "avatar": "/images/avatars/1.png"
+    "avatar": "/images/avatars/1.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 13,
@@ -117,7 +137,10 @@
     "role": "Marketing",
     "cabang": "Bogor",
     "nomortelepon": "0833333333",
-    "avatar": "/images/avatars/3.png"
+    "avatar": "/images/avatars/3.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 14,
@@ -125,7 +148,10 @@
     "role": "SPV Sales",
     "cabang": "Bogor",
     "nomortelepon": "08444444444",
-    "avatar": "/images/avatars/4.png"
+    "avatar": "/images/avatars/4.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 15,
@@ -133,7 +159,10 @@
     "role": "Manager Sales",
     "cabang": "Medan",
     "nomortelepon": "0855555555555",
-    "avatar": "/images/avatars/5.png"
+    "avatar": "/images/avatars/5.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 16,
@@ -141,7 +170,10 @@
     "role": "Kepala Cabang",
     "cabang": "Medan",
     "nomortelepon": "08666666666",
-    "avatar": "/images/avatars/6.png"
+    "avatar": "/images/avatars/6.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 17,
@@ -149,7 +181,10 @@
     "role": "Kepala Cabang",
     "cabang": "Sidoarjo",
     "nomortelepon": "08777777777",
-    "avatar": "/images/avatars/7.png"
+    "avatar": "/images/avatars/7.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 18,
@@ -157,7 +192,10 @@
     "role": "Sales",
     "cabang": "Sidoarjo",
     "nomortelepon": "08888888888",
-    "avatar": "/images/avatars/8.png"
+    "avatar": "/images/avatars/8.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 19,
@@ -165,7 +203,10 @@
     "role": "Kepala Cabang",
     "cabang": "Palembang",
     "nomortelepon": "08999999999",
-    "avatar": "/images/avatars/9.png"
+    "avatar": "/images/avatars/9.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 20,
@@ -173,7 +214,10 @@
     "role": "Sales",
     "cabang": "Palembang",
     "nomortelepon": "08101010101",
-    "avatar": "/images/avatars/10.png"
+    "avatar": "/images/avatars/10.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 21,
@@ -181,7 +225,10 @@
     "role": "Kepala Cabang",
     "cabang": "Klaten",
     "nomortelepon": "08811111111",
-    "avatar": "/images/avatars/11.png"
+    "avatar": "/images/avatars/11.png",
+    "gender": "male",
+    "username": "",
+    "password": ""
   },
   {
     "id": 22,
@@ -190,7 +237,6 @@
     "cabang": "Klaten",
     "nomortelepon": "08822222222",
     "avatar": "/images/avatars/1.png",
-    "email": "",
     "gender": "male",
     "username": "",
     "password": ""

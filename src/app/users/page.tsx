@@ -1,10 +1,10 @@
 // src/app/users/page.tsx
 import React from 'react';
-import AdminList from '@/components/users/AdminList';
+import UserList from '@/components/users/UserList';
 import Hero from '@/components/users/Hero';
 
 export const metadata = {
-  title: 'Users - Admin Pengelola',
+  title: 'Users - Admin Pengelola Ekatalog',
 };
 
 export default function UsersPage() {
@@ -12,7 +12,7 @@ export default function UsersPage() {
     <div className="space-y-6">
       <Hero />
       <div className="bg-white rounded-xl shadow p-6">
-        <AdminList />
+        <UserList />
       </div>
     </div>
   );
