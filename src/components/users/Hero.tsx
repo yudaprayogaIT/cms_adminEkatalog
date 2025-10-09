@@ -1,11 +1,21 @@
-// src/components/users/Hero.tsx
 'use client';
 
-import React, { useState } from 'react';
-import AddMemberModal from './AddUserModal';
+import React, { useEffect, useState } from 'react';
 
 export default function Hero() {
-  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState('');
+
+  useEffect(() => {
+    function handleReset() {
+      setQ('');
+      // also notify UserList if needed (not necessary here),
+      // but we listen to reset from UserList.
+    }
+    window.addEventListener('ekatalog:reset_search', handleReset);
+    return () => {
+      window.removeEventListener('ekatalog:reset_search', handleReset);
+    };
+  }, []);
 
   return (
     <div className="flex items-center justify-between">
@@ -15,23 +25,33 @@ export default function Hero() {
       </div>
 
       <div className="flex items-center gap-3">
-        {/* <div className="relative">
+        <div className="relative">
           <input
             type="search"
-            placeholder="Search name or email..."
+            value={q}
+            onChange={(e) => {
+              const v = e.target.value;
+              setQ(v);
+              // dispatch search change to UserList
+              window.dispatchEvent(
+                new CustomEvent('ekatalog:search_change', { detail: v })
+              );
+            }}
+            placeholder="Search name, phone or branch..."
             className="w-56 px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-1 focus:ring-primary"
           />
-        </div> */}
-{/* 
+        </div>
+
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            // tell UserList to open AddUserModal
+            window.dispatchEvent(new Event('ekatalog:open_add_user'));
+          }}
           className="bg-[#2563EB] text-white px-3 py-2 rounded-md text-sm hover:opacity-95 transition"
         >
           Add New Member
-        </button> */}
+        </button>
       </div>
-
-      <AddMemberModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }

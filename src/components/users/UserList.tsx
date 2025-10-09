@@ -14,7 +14,7 @@ type User = {
   role: string;
   nomortelepon?: string;
   avatar?: string;
-  gender?: "male" | "female" | string;
+  gender?: "male" | "female";
   username?: string;
   password?: string;
 };
@@ -65,6 +65,35 @@ export default function UserList() {
   const [confirmTitle, setConfirmTitle] = useState("");
   const [confirmDesc, setConfirmDesc] = useState("");
   const confirmActionRef = useRef<(() => Promise<void>) | null>(null);
+
+  // --- EVENTS FROM HERO: open add modal & search change ---
+  useEffect(() => {
+    function handleOpenAdd() {
+      setModalInitial(null);
+      setModalOpen(true);
+    }
+    function handleSearchChange(ev: Event) {
+      const detail = (ev as CustomEvent<string>).detail;
+      setSearch(typeof detail === "string" ? detail : "");
+      // when Hero changes search we reset page to 1 like before
+      setPage(1);
+      if (pageSize === 0) setDisplayCount(16);
+    }
+
+    window.addEventListener("ekatalog:open_add_user", handleOpenAdd);
+    window.addEventListener(
+      "ekatalog:search_change",
+      handleSearchChange as EventListener
+    );
+
+    return () => {
+      window.removeEventListener("ekatalog:open_add_user", handleOpenAdd);
+      window.removeEventListener(
+        "ekatalog:search_change",
+        handleSearchChange as EventListener
+      );
+    };
+  }, [pageSize]);
 
   // --- load branches (snapshot or file) ---
   useEffect(() => {
@@ -358,11 +387,11 @@ export default function UserList() {
   }
 
   // footer helper
-  function loadMore() {
-    if (pageSize === 0)
-      setDisplayCount((cur) => Math.min(cur + 16, filtered.length));
-    else setPage((p) => Math.min(p + 1, totalPages));
-  }
+  // function loadMore() {
+  //   if (pageSize === 0)
+  //     setDisplayCount((cur) => Math.min(cur + 16, filtered.length));
+  //   else setPage((p) => Math.min(p + 1, totalPages));
+  // }
   function nextPage() {
     if (pageSize === 0)
       setDisplayCount((cur) => Math.min(cur + 16, filtered.length));
@@ -464,30 +493,18 @@ export default function UserList() {
         </div>
 
         <div className="flex items-center gap-2">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search name, phone or branch..."
-            className="px-3 py-2 border rounded-md text-sm w-72"
-          />
+          {/* Search & Add moved to Hero — keep Reset here but notify Hero to clear its input */}
           <button
             onClick={() => {
               setSearch("");
               setRoleFilter("All");
               setCabangFilter("All");
+              // notify Hero to reset its input value
+              window.dispatchEvent(new Event("ekatalog:reset_search"));
             }}
             className="px-3 py-2 bg-gray-100 rounded-md text-sm"
           >
             Reset
-          </button>
-          <button
-            onClick={() => {
-              setModalInitial(null);
-              setModalOpen(true);
-            }}
-            className="px-3 py-2 bg-[#2563EB] text-white rounded-md text-sm"
-          >
-            Add New User
           </button>
         </div>
       </div>
@@ -596,11 +613,27 @@ export default function UserList() {
         user={viewUser}
         onEdit={(u) => {
           setViewOpen(false);
-          openEditModal(u);
+          // Ensure gender is "male", "female", or undefined
+          const safeUser = {
+            ...u,
+            gender:
+              u.gender === "male" || u.gender === "female"
+                ? (u.gender as "male" | "female")
+                : undefined,
+          };
+          openEditModal(safeUser);
         }}
         onDelete={(u) => {
           setViewOpen(false);
-          promptDeleteUser(u);
+          // Ensure gender is "male", "female", or undefined
+          const safeUser = {
+            ...u,
+            gender:
+              u.gender === "male" || u.gender === "female"
+                ? (u.gender as "male" | "female")
+                : undefined,
+          };
+          promptDeleteUser(safeUser);
         }}
       />
 

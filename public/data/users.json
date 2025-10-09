@@ -248,8 +248,19 @@
     "cabang": "Sidoarjo",
     "nomortelepon": "083141415565",
     "avatar": "/images/avatars/avatarman_placeholder.png",
-    "gender": "male",
+    "gender": "female",
     "username": "tescowo",
+    "password": "katasandi1!"
+  },
+  {
+    "id": 24,
+    "name": "tes cewe",
+    "role": "Kepala Cabang",
+    "cabang": "Klaten",
+    "nomortelepon": "083131441",
+    "avatar": "/images/avatars/avatarwoman_placeholder.png",
+    "gender": "female",
+    "username": "cewetes",
     "password": "katasandi1!"
   }
 ]

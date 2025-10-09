@@ -1,8 +1,9 @@
 // src/components/users/UserDetailModal.tsx
-'use client';
+"use client";
 
-import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 type User = {
   id: number;
@@ -12,7 +13,7 @@ type User = {
   nomortelepon?: string;
   avatar?: string;
   email?: string;
-  gender?: 'male' | 'female' | string;
+  gender?: "male" | "female" | string;
   username?: string;
   password?: string;
   // any other fields you may have
@@ -26,10 +27,20 @@ type Props = {
   onDelete?: (u: User) => void;
 };
 
-export default function UserDetailModal({ open, onClose, user, onEdit, onDelete }: Props) {
+export default function UserDetailModal({
+  open,
+  onClose,
+  user,
+  onEdit,
+  onDelete,
+}: Props) {
   if (!user) return null;
 
-  const avatar = user.avatar ?? (user.gender === 'female' ? '/images/avatars/avatarwoman_placeholder.png' : '/images/avatars/avatarman_placeholder.png');
+  const avatar =
+    user.avatar ??
+    (user.gender === "female"
+      ? "/images/avatars/avatarwoman_placeholder.png"
+      : "/images/avatars/avatarman_placeholder.png");
 
   return (
     <AnimatePresence>
@@ -39,7 +50,7 @@ export default function UserDetailModal({ open, onClose, user, onEdit, onDelete 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-start justify-center p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center p-6"
         >
           <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
@@ -48,35 +59,37 @@ export default function UserDetailModal({ open, onClose, user, onEdit, onDelete 
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -12, opacity: 0 }}
             transition={{ duration: 0.16 }}
-            className="relative z-10 w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden"
+            className="relative z-10 w-full max-w-2xl h-full max-h-95 bg-white rounded-2xl shadow-2xl overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-label={`Detail ${user.name}`}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
-              {/* LEFT: image + thumbnails */}
-              <div className="flex flex-col gap-4">
-                <div className="rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center h-72">
-                  <img src={avatar} alt={user.name} className="object-cover w-full h-full" />
-                </div>
-
-                <div className="flex gap-3 overflow-x-auto">
-                  {/* thumbnails: for demo we just show avatar several times */}
-                  {[0,1,2,3].map((i) => (
-                    <div key={`thumb-${user.id}-${i}`} className="w-16 h-16 rounded-md overflow-hidden bg-gray-50 border">
-                      <img src={avatar} alt={`thumb-${i}`} className="object-cover w-full h-full" />
-                    </div>
-                  ))}
-                </div>
+            <div className="flex items-center justify-center gap-6 p-6">
+              {/* LEFT: image */}
+              <div className="rounded-lg overflow-hidden bg-gray-100 flex flex-1 items-center justify-center h-72">
+                <Image
+                  src={avatar}
+                  width={1000}
+                  height={1000}
+                  alt={user.name}
+                  className="object-cover w-full h-full"
+                />
               </div>
 
               {/* RIGHT: details */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 flex-2">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-900">{user.name}</h2>
-                    <div className="text-sm text-gray-500 mt-1">{user.role} {user.cabang ? `• ${String(user.cabang)}` : ''}</div>
-                    <div className="text-xs text-gray-400 mt-1">ID: {user.id}</div>
+                    <h2 className="text-2xl font-semibold text-gray-900">
+                      {user.name}
+                    </h2>
+                    <div className="text-sm text-gray-500 mt-1">
+                      {user.role}{" "}
+                      {user.cabang ? `• ${String(user.cabang)}` : ""}
+                    </div>
+                    <div className="text-xs text-gray-400 mt-1">
+                      ID: {user.id}
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -99,35 +112,58 @@ export default function UserDetailModal({ open, onClose, user, onEdit, onDelete 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
                       <div className="text-xs text-gray-500">Username</div>
-                      <div className="text-sm text-gray-800">{user.username ?? '-'}</div>
+                      <div className="text-sm text-gray-800">
+                        {user.username ?? "-"}
+                      </div>
                     </div>
                     <div>
                       <div className="text-xs text-gray-500">Phone</div>
-                      <div className="text-sm text-gray-800">{user.nomortelepon ?? '-'}</div>
+                      <div className="text-sm text-gray-800">
+                        {user.nomortelepon ?? "-"}
+                      </div>
                     </div>
 
-                    <div>
+                    {/* <div>
                       <div className="text-xs text-gray-500">Email</div>
-                      <div className="text-sm text-gray-800">{user.email ?? '-'}</div>
-                    </div>
+                      <div className="text-sm text-gray-800">
+                        {user.email ?? "-"}
+                      </div>
+                    </div> */}
 
                     <div>
                       <div className="text-xs text-gray-500">Gender</div>
-                      <div className="text-sm text-gray-800">{user.gender ?? '-'}</div>
+                      <div className="text-sm text-gray-800">
+                        {user.gender ?? "-"}
+                      </div>
                     </div>
                   </div>
 
                   <div className="mt-4">
                     <div className="text-xs text-gray-500">Notes</div>
-                    <div className="text-sm text-gray-700 mt-1">Kamu bisa tambahkan field lain di users.json dan tampilkan di sini.</div>
+                    <div className="text-sm text-gray-700 mt-1">
+                      -
+                    </div>
                   </div>
                 </div>
 
                 <div className="mt-auto border-t pt-4 flex items-center justify-between gap-3">
                   <div className="text-sm text-gray-500">Last updated: —</div>
                   <div className="flex items-center gap-2">
-                    <button onClick={onClose} className="px-3 py-2 rounded border text-sm">Close</button>
-                    <a href="#" onClick={(e)=>{ e.preventDefault(); /* optionally navigate */ }} className="px-3 py-2 rounded bg-[#2563EB] text-white text-sm">Send Message</a>
+                    <button
+                      onClick={onClose}
+                      className="px-3 py-2 rounded border text-sm"
+                    >
+                      Close
+                    </button>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault(); /* optionally navigate */
+                      }}
+                      className="px-3 py-2 rounded bg-[#2563EB] text-white text-sm"
+                    >
+                      Send Message
+                    </a>
                   </div>
                 </div>
               </div>
