@@ -3,17 +3,17 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import UserCard from "./UserCard";
-import AddMemberModal from "./AddUserModal";
+import AddUserModal from "./AddUserModal";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import UserDetailModal from "./UserDetailModal";
 
 type User = {
   id: number;
-  cabang?: string; // legacy could be branch name or daerah or branch id string
+  cabang?: string;
   name: string;
   role: string;
   nomortelepon?: string;
   avatar?: string;
-  // email?: string;
   gender?: "male" | "female" | string;
   username?: string;
   password?: string;
@@ -32,7 +32,7 @@ export default function UserList() {
 
   // filters + pagination
   const [roleFilter, setRoleFilter] = useState<string>("All");
-  const [cabangFilter, setCabangFilter] = useState<string>("All"); // stores daerah string or "All"
+  const [cabangFilter, setCabangFilter] = useState<string>("All");
   const [search, setSearch] = useState<string>("");
   const [pageSize, setPageSize] = useState<number>(8);
   const [page, setPage] = useState<number>(1);
@@ -52,6 +52,10 @@ export default function UserList() {
   // modal add/edit
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitial, setModalInitial] = useState<User | null>(null);
+
+  // detail modal (open when card clicked)
+  const [viewOpen, setViewOpen] = useState(false);
+  const [viewUser, setViewUser] = useState<User | null>(null);
 
   // branches (for cabang select)
   const [branches, setBranches] = useState<Branch[]>([]);
@@ -168,7 +172,7 @@ export default function UserList() {
     return ["All", ...Array.from(s).sort()];
   }, [users]);
 
-  // filtering (supports cabangFilter by daerah OR branch name OR legacy cabang)
+  // filtering
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return users.filter((a) => {
@@ -322,7 +326,6 @@ export default function UserList() {
       cabang: lastDeleted.item.cabang,
       nomortelepon: lastDeleted.item.nomortelepon,
       avatar: lastDeleted.item.avatar,
-      // email: lastDeleted.item.email,
       gender: lastDeleted.item.gender,
       username: lastDeleted.item.username,
       password: lastDeleted.item.password,
@@ -334,6 +337,12 @@ export default function UserList() {
   function openEditModal(user: User) {
     setModalInitial(user);
     setModalOpen(true);
+  }
+
+  // open detail modal when card clicked
+  function openView(user: User) {
+    setViewUser(user);
+    setViewOpen(true);
   }
 
   // confirm handlers
@@ -429,8 +438,11 @@ export default function UserList() {
             className="px-3 py-2 border rounded-md text-sm"
           >
             <option value="All">All</option>
-            {branches.map((b) => (
-              <option key={b.daerah} value={String(b.daerah)}>
+            {branches.map((b, i) => (
+              <option
+                key={`${b.daerah ?? "branch"}-${i}`}
+                value={String(b.daerah)}
+              >
                 {(b.daerah || "").replace(/\b\w/g, (c) => c.toUpperCase())} -{" "}
                 {(b.name || "").replace(/\b\w/g, (c) => c.toUpperCase())}
               </option>
@@ -502,6 +514,7 @@ export default function UserList() {
               avatar={avatarSrc}
               onDelete={() => promptDeleteUser(a)}
               onEdit={() => openEditModal(a)}
+              onClick={() => openView(a)}
             />
           );
         })}
@@ -553,14 +566,12 @@ export default function UserList() {
           >
             Prev
           </button>
-
           <div className="text-sm px-2">
             Page {pageSize === 0 ? Math.ceil(displayCount / 16) : page} /{" "}
             {pageSize === 0
               ? Math.max(1, Math.ceil(filtered.length / 16))
               : totalPages}
           </div>
-
           <button
             onClick={nextPage}
             disabled={endIndex >= filtered.length}
@@ -568,22 +579,29 @@ export default function UserList() {
           >
             Next
           </button>
-
-          {/* <button
-            onClick={loadMore}
-            disabled={endIndex >= filtered.length}
-            className="px-3 py-2 rounded-md bg-blue-600 text-white text-sm disabled:opacity-50"
-          >
-            Load more
-          </button> */}
         </div>
       </div>
 
       {/* Add/Edit modal */}
-      <AddMemberModal
+      <AddUserModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         initialData={modalInitial}
+      />
+
+      {/* Detail modal (open when clicking a card) */}
+      <UserDetailModal
+        open={viewOpen}
+        onClose={() => setViewOpen(false)}
+        user={viewUser}
+        onEdit={(u) => {
+          setViewOpen(false);
+          openEditModal(u);
+        }}
+        onDelete={(u) => {
+          setViewOpen(false);
+          promptDeleteUser(u);
+        }}
       />
 
       {/* Confirm dialog */}

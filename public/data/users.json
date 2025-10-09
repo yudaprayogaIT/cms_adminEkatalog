@@ -240,5 +240,16 @@
     "gender": "male",
     "username": "",
     "password": ""
+  },
+  {
+    "id": 23,
+    "name": "tes cowo",
+    "role": "Administrator",
+    "cabang": "Sidoarjo",
+    "nomortelepon": "083141415565",
+    "avatar": "/images/avatars/avatarman_placeholder.png",
+    "gender": "male",
+    "username": "tescowo",
+    "password": "katasandi1!"
   }
 ]

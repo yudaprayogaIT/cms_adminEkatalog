@@ -1,4 +1,4 @@
-// src/components/users/AddMemberModal.tsx
+// src/components/users/AddUserModal.tsx
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';

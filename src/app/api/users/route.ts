@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
-const DATA_PATH = path.join(process.cwd(), 'public', 'data', 'admins.json');
+const DATA_PATH = path.join(process.cwd(), 'public', 'data', 'users.json');
 
 export async function GET() {
   try {
