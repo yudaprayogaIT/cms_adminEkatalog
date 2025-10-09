@@ -1,10 +1,10 @@
-// src/components/branches/BranchList.tsx
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import BranchCard from './BranchCard';
 import AddBranchModal from './AddBranchModal';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import BranchDetailModal from './BranchDetailModal';
 
 type Branch = {
   id: number;
@@ -26,6 +26,10 @@ export default function BranchList() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitial, setModalInitial] = useState<Branch | null>(null);
+
+  // detail modal
+  const [viewOpen, setViewOpen] = useState(false);
+  const [viewBranch, setViewBranch] = useState<Branch | null>(null);
 
   // confirm
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -94,14 +98,43 @@ export default function BranchList() {
     setConfirmOpen(true);
   }
 
-  function handleEdit(b: Branch) { setModalInitial(b); setModalOpen(true); }
-  function handleAdd() { setModalInitial(null); setModalOpen(true); }
+  function handleEdit(b: Branch) {
+    setModalInitial(b);
+    setModalOpen(true);
+  }
+  function handleAdd() {
+    setModalInitial(null);
+    setModalOpen(true);
+  }
 
   async function confirmOk() {
     setConfirmOpen(false);
     if (actionRef.current) { await actionRef.current(); actionRef.current = null; }
   }
   function confirmCancel() { actionRef.current = null; setConfirmOpen(false); }
+
+  // ---- detail modal handlers ----
+  function openView(b: Branch) {
+    setViewBranch(b);
+    setViewOpen(true);
+  }
+  function closeView() {
+    setViewOpen(false);
+    setViewBranch(null);
+  }
+
+  // when user clicks Edit in detail modal -> open edit modal
+  function onDetailEdit(b: Branch) {
+    closeView();
+    // small timeout to avoid UI clash between modals
+    setTimeout(() => handleEdit(b), 80);
+  }
+
+  // when user clicks Delete in detail modal -> prompt confirm (close detail first)
+  function onDetailDelete(b: Branch) {
+    closeView();
+    setTimeout(() => promptDeleteBranch(b), 80);
+  }
 
   if (loading) return <div className="py-8 text-center text-sm text-gray-500">Loading branches...</div>;
   if (error) return <div className="py-8 text-center text-sm text-red-500">Error: {error}</div>;
@@ -119,11 +152,29 @@ export default function BranchList() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {branches.map((b) => (
-          <BranchCard key={b.id} id={b.id} daerah={b.daerah} name={b.name} address={b.address} pulau={b.pulau} onDelete={() => promptDeleteBranch(b)} onEdit={() => handleEdit(b)} />
+          <BranchCard
+            key={b.id}
+            id={b.id}
+            daerah={b.daerah}
+            name={b.name}
+            address={b.address}
+            pulau={b.pulau}
+            onDelete={() => promptDeleteBranch(b)}
+            onEdit={() => handleEdit(b)}
+            onView={() => openView(b)}
+          />
         ))}
       </div>
 
       <AddBranchModal open={modalOpen} onClose={() => setModalOpen(false)} initial={modalInitial} />
+
+      <BranchDetailModal
+        open={viewOpen}
+        onClose={closeView}
+        branch={viewBranch}
+        onEdit={onDetailEdit}
+        onDelete={onDetailDelete}
+      />
 
       <ConfirmDialog open={confirmOpen} title={confirmTitle} description={confirmDesc} onConfirm={confirmOk} onCancel={confirmCancel} confirmLabel="Yes, delete" cancelLabel="Cancel" />
     </div>
