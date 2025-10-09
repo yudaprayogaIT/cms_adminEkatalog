@@ -148,7 +148,7 @@ export default function UserDetailModal({
 
                 <div className="mt-auto border-t pt-4 flex items-center justify-between gap-3">
                   <div className="text-sm text-gray-500">Last updated: —</div>
-                  <div className="flex items-center gap-2">
+                  {/* <div className="flex items-center gap-2">
                     <button
                       onClick={onClose}
                       className="px-3 py-2 rounded border text-sm"
@@ -158,13 +158,13 @@ export default function UserDetailModal({
                     <a
                       href="#"
                       onClick={(e) => {
-                        e.preventDefault(); /* optionally navigate */
+                        e.preventDefault();
                       }}
                       className="px-3 py-2 rounded bg-[#2563EB] text-white text-sm"
                     >
                       Send Message
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

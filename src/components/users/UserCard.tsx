@@ -11,8 +11,8 @@ export default function UserCard({
   role,
   nomortelepon,
   avatar,
-  onDelete,
-  onEdit,
+  // onDelete,
+  // onEdit,
   onClick,
 }: {
   id?: number;
@@ -36,15 +36,15 @@ export default function UserCard({
     >
       <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('/images/pattern.png')] bg-contain" />
       <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white shadow-lg mb-4">
-        {/* using img tag here is fine; you can swap to next/image if desired */}
-        <img src={avatar} alt={name} className="object-cover w-full h-full" />
+        <Image src={avatar} alt={name} width={1000} height={1000} className="object-cover w-full h-full" />
       </div>
 
-      <div className="text-sm font-medium text-gray-800">{name}</div>
-      <div className="text-xs text-gray-400 mt-1">{role} {cabang ? `- ${cabang}` : ''}</div>
-      <div className="text-xs text-gray-400 mt-2">{nomortelepon}</div>
+      <div className="text-lg font-medium text-gray-800">{name}</div>
+      <div className="text-sm text-gray-400 mt-1">{role} {cabang ? `- ${cabang}` : ''}</div>
+      {/* <div className="text-xs text-gray-400 mt-2">{cabang} - {name}</div> */}
+      <div className="text-sm text-gray-400 mt-2">{nomortelepon}</div>
 
-      <div className="mt-4 flex gap-2">
+      {/* <div className="mt-4 flex gap-2">
         <button
           onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
           className="text-xs px-3 py-1 rounded-md border border-gray-200 hover:bg-gray-50"
@@ -59,7 +59,7 @@ export default function UserCard({
         >
           Remove
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
