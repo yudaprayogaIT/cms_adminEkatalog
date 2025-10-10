@@ -12,18 +12,18 @@
 
 // // ----- MENU DATA -----
 // const MAIN_MENU: MenuItem[] = [
-//   { label: 'Dashboard', href: '/', icon: '/icons/dashboard.svg' },
-//   { label: 'Products', href: '/products', icon: '/icons/products.svg' },
-//   { label: 'Favorites', href: '/favorites', icon: '/icons/favorites.svg' },
-//   { label: 'Inbox', href: '/inbox', icon: '/icons/inbox.svg' },
-//   { label: 'Order Lists', href: '/orders', icon: '/icons/orders.svg' },
-//   { label: 'Product Stock', href: '/stock', icon: '/icons/stock.svg' },
+//   { label: 'Dashboard', href: '/', icon: '/icons/menu/dashboard.svg' },
+//   { label: 'Products', href: '/products', icon: '/icons/menu/products.svg' },
+//   { label: 'Favorites', href: '/favorites', icon: '/icons/menu/favorites.svg' },
+//   { label: 'Inbox', href: '/inbox', icon: '/icons/menu/inbox.svg' },
+//   { label: 'Order Lists', href: '/orders', icon: '/icons/menu/orders.svg' },
+//   { label: 'Product Stock', href: '/stock', icon: '/icons/menu/stock.svg' },
 // ];
 
 // const SECONDARY_MENU: MenuItem[] = [
-//   { label: 'Users', href: '/users', icon: '/icons/user.svg' },
-//   { label: 'Branches', href: '/branches', icon: '/icons/branches.svg' },
-//   { label: 'To-Do', href: '/todo', icon: '/icons/todo.svg' },
+//   { label: 'Users', href: '/users', icon: '/icons/menu/user.svg' },
+//   { label: 'Branches', href: '/branches', icon: '/icons/menu/branches.svg' },
+//   { label: 'To-Do', href: '/todo', icon: '/icons/menu/todo.svg' },
 // ];
 
 // const groups: MenuGroup[] = [
@@ -281,24 +281,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 type MenuItem = { label: string; href: string; icon: string };
 
 const MAIN_MENU: MenuItem[] = [
-  { label: 'Dashboard', href: '/', icon: '/icons/dashboard.svg' },
+  { label: 'Dashboard', href: '/', icon: '/icons/menu/dashboard.svg' },
   // Products dipindahkan ke dalam Catalog submenu
-  { label: 'Favorites', href: '/favorites', icon: '/icons/favorites.svg' },
-  { label: 'Inbox', href: '/inbox', icon: '/icons/inbox.svg' },
-  { label: 'Order Lists', href: '/orders', icon: '/icons/orders.svg' },
-  { label: 'Product Stock', href: '/stock', icon: '/icons/stock.svg' },
+  { label: 'Favorites', href: '/favorites', icon: '/icons/menu/favorites.svg' },
+  { label: 'Inbox', href: '/inbox', icon: '/icons/menu/inbox.svg' },
+  { label: 'Order Lists', href: '/orders', icon: '/icons/menu/orders.svg' },
+  { label: 'Product Stock', href: '/stock', icon: '/icons/menu/stock.svg' },
 ];
 
 const SECONDARY_MENU: MenuItem[] = [
-  { label: 'Users', href: '/users', icon: '/icons/user.svg' },
-  { label: 'Branches', href: '/branches', icon: '/icons/branches.svg' },
-  { label: 'To-Do', href: '/todo', icon: '/icons/todo.svg' },
+  { label: 'Users', href: '/users', icon: '/icons/menu/user.svg' },
+  { label: 'Branches', href: '/branches', icon: '/icons/menu/branches.svg' },
+  { label: 'To-Do', href: '/todo', icon: '/icons/menu/todo.svg' },
 ];
 
 // Catalog submenu (parent)
 const CATALOG_SUBMENU: MenuItem[] = [
-  { label: 'Products', href: '/products', icon: '/icons/products.svg' },
-  { label: 'Categories', href: '/categories', icon: '/icons/category.svg' },
+  { label: 'Products', href: '/products', icon: '/icons/menu/products.svg' },
+  { label: 'Categories', href: '/categories', icon: '/icons/menu/category.svg' },
 ];
 
 export default function Sidebar() {
@@ -333,7 +333,7 @@ export default function Sidebar() {
     pathname === href || pathname.startsWith(href + '/');
 
   // motion widths in px (to match tailwind w-20/w-64)
-  const collapsedWidth = 80;
+  const collapsedWidth = 100;
   const expandedWidth = 200;
 
   return (
@@ -350,7 +350,7 @@ export default function Sidebar() {
         <div className="flex items-center gap-3">
           {collapsed ? (
             <div className="w-8 h-8 flex-shrink-0">
-              <Image src="/images/LOGO ETM.png" alt="logo" width={32} height={32} className="object-contain" />
+              <Image src="/images/logo_etm.png" alt="logo" width={32} height={32} className="object-contain" />
             </div>
           ) : (
             <span className="text-lg font-semibold text-gray-800">E-Katalog</span>
@@ -434,7 +434,7 @@ export default function Sidebar() {
                     />
                     <div className={`flex items-center gap-3 rounded-md px-3 py-2 relative z-10 ${collapsed ? 'justify-center' : ''}`}>
                       <div className={`w-6 h-6 flex items-center justify-center ${parentActive ? 'text-white' : 'text-gray-600'}`}>
-                        <Image src="/icons/catalog.svg" alt="Catalog" width={20} height={20} />
+                        <Image src="/icons/menu/catalog.svg" alt="Catalog" width={20} height={20} />
                       </div>
                       {!collapsed && <span className={`truncate ${parentActive ? 'text-white' : 'text-gray-700'}`}>Catalog</span>}
 
@@ -456,13 +456,6 @@ export default function Sidebar() {
                       )}
                     </div>
                   </button>
-
-                  {/* Tooltip when collapsed (simple) */}
-                  {collapsed && (
-                    <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 z-20">
-                      <div className="bg-gray-800 text-white text-xs rounded-md px-2 py-1 shadow">Catalog</div>
-                    </div>
-                  )}
                 </div>
               );
             })()}

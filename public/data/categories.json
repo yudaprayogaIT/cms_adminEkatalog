@@ -1,0 +1,163 @@
+[
+  {
+    "id": 1,
+    "name": "Accessories",
+    "type": "Material",
+    "points": 5,
+    "image": "/images/categories/acc.png",
+    "description": "Accesories springbed dan sofa"
+  },
+  {
+    "id": 2,
+    "name": "Accessories Kaki",
+    "type": "Material",
+    "points": 7,
+    "image": "/images/categories/acc-kaki.png",
+    "description": "Accesories Kaki springbed dan sofa"
+  },
+  {
+    "id": 3,
+    "name": "Bahan Kimia",
+    "type": "Material",
+    "points": 6,
+    "image": "/images/categories/bahan-kimia.png",
+    "description": "Bahan kimia untuk produksi furniture."
+  },
+  {
+    "id": 4,
+    "name": "Busa",
+    "type": "Material",
+    "points": 6,
+    "image": "/images/categories/busa.png",
+    "description": "Busa untuk produksi furniture."
+  },
+  {
+    "id": 5,
+    "name": "HDP",
+    "type": "Material",
+    "points": 10,
+    "image": "/images/categories/hdp.png",
+    "description": "HDP untuk furniture."
+  },
+  {
+    "id": 6,
+    "name": "Jasa",
+    "type": "Material",
+    "points": 8,
+    "image": "/images/categories/jasa.png",
+    "description": "Jasa pemasangan atau pembuatan furniture."
+  },
+  {
+    "id": 7,
+    "name": "Kain Polos Sofa",
+    "type": "Material",
+    "points": 9,
+    "image": "/images/categories/kp-sofa.png",
+    "description": "Kain polos untuk sofa."
+  },
+  {
+    "id": 8,
+    "name": "Kain Polos Springbed",
+    "type": "Material",
+    "points": 4,
+    "image": "/images/categories/kp-springbed.png",
+    "description": "Kain polos untuk springbed."
+  },
+  {
+    "id": 9,
+    "name": "Kawat",
+    "type": "Material",
+    "points": 3,
+    "image": "/images/categories/kawat.png",
+    "description": "Kawat untuk springbed."
+  },
+  {
+    "id": 10,
+    "name": "Non Woven",
+    "type": "Material",
+    "points": 2,
+    "image": "/images/categories/non-woven.png",
+    "description": "Kain non woven untuk springbed."
+  },
+  {
+    "id": 11,
+    "name": "Other",
+    "type": "Material",
+    "points": 1,
+    "image": "/images/categories/other.png",
+    "description": ""
+  },
+  {
+    "id": 12,
+    "name": "Per",
+    "type": "Material",
+    "points": 11,
+    "image": "/images/categories/per.png",
+    "description": "Per untuk springbed."
+  },
+  {
+    "id": 13,
+    "name": "Pita List",
+    "type": "Material",
+    "points": 12,
+    "image": "/images/categories/pita-list.png",
+    "description": "Pita list untuk sofa."
+  },
+  {
+    "id": 14,
+    "name": "Plastik",
+    "type": "Material",
+    "points": 6,
+    "image": "/images/categories/plastik.png",
+    "description": "Plastik untuk springbed dan sofa."
+  },
+  {
+    "id": 15,
+    "name": "Stapless",
+    "type": "Material",
+    "points": 8,
+    "image": "/images/categories/stapless.png"
+  },
+  {
+    "id": 16,
+    "name": "Kasur",
+    "type": "Furniture",
+    "points": 6,
+    "image": "/images/categories/kasur.png"
+  },
+  {
+    "id": 17,
+    "name": "Kitchen",
+    "type": "Furniture",
+    "points": 10,
+    "image": "/images/categories/kitchen.png"
+  },
+  {
+    "id": 18,
+    "name": "Lemari",
+    "type": "Furniture",
+    "points": 4,
+    "image": "/images/categories/Lemari.png"
+  },
+  {
+    "id": 19,
+    "name": "Kursi",
+    "type": "Furniture",
+    "points": 6,
+    "image": "/images/categories/kursi.png"
+  },
+  {
+    "id": 20,
+    "name": "Meja",
+    "type": "Furniture",
+    "points": 8,
+    "image": "/images/categories/meja.png"
+  },
+  {
+    "id": 21,
+    "name": "Rak",
+    "type": "Furniture",
+    "points": 3,
+    "image": "/images/categories/rak.png"
+  }
+]
