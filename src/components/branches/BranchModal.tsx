@@ -12,6 +12,7 @@ type Branch = {
   lat?: number;
   lng?: number;
   pulau?: string;
+  wilayah?: string;
 };
 
 const SNAP_KEY = 'ekatalog_branches_snapshot';
@@ -21,6 +22,7 @@ export default function BranchModal({ open, onClose, initial }: { open: boolean;
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [pulau, setPulau] = useState('');
+  const [wilayah, setWilayah] = useState('');
   const [lat, setLat] = useState<string>('');
   const [lng, setLng] = useState<string>('');
   const [saving, setSaving] = useState(false);
@@ -31,6 +33,7 @@ export default function BranchModal({ open, onClose, initial }: { open: boolean;
       setName(initial.name);
       setAddress(initial.address);
       setPulau(initial.pulau ?? '');
+      setWilayah(initial.wilayah ?? '');
       setLat(initial.lat?.toString() ?? '');
       setLng(initial.lng?.toString() ?? '');
     } else {
@@ -38,6 +41,7 @@ export default function BranchModal({ open, onClose, initial }: { open: boolean;
       setName('');
       setAddress('');
       setPulau('');
+      setWilayah('');
       setLat('');
       setLng('');
     }
@@ -52,6 +56,7 @@ export default function BranchModal({ open, onClose, initial }: { open: boolean;
       name,
       address,
       pulau,
+      wilayah,
       lat: lat ? Number(lat) : undefined,
       lng: lng ? Number(lng) : undefined,
     };
@@ -118,6 +123,11 @@ export default function BranchModal({ open, onClose, initial }: { open: boolean;
               <div>
                 <label className="text-xs text-gray-600">Name</label>
                 <input value={name} onChange={(e) => setName(e.target.value)} className="w-full px-3 py-2 border rounded mt-1 text-sm" placeholder="Branch name" />
+              </div>
+
+              <div>
+                <label className="text-xs text-gray-600">Territory</label>
+                <input value={wilayah} onChange={(e) => setWilayah(e.target.value)} className="w-full px-3 py-2 border rounded mt-1 text-sm" placeholder="Branch territory" />
               </div>
 
               <div>

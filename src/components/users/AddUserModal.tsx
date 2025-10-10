@@ -4,6 +4,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import Image from 'next/image';
 
 type User = {
   id: number;
@@ -202,7 +203,7 @@ export default function AddMemberModal({ open, onClose, initialData = null }: Pr
             <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col items-center gap-3 md:col-span-2">
                 <div className="w-20 h-20 rounded-full overflow-hidden border p-1 bg-white">
-                  <img src={avatar} alt="avatar preview" className="object-cover w-full h-full" />
+                  <Image src={avatar} alt="avatar preview" width={100} height={100} className="object-cover w-full h-full" />
                 </div>
                 <div className="text-xs text-gray-500">Avatar akan mengikuti gender placeholder</div>
               </div>

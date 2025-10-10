@@ -11,6 +11,7 @@ type Branch = {
   lat?: number;
   lng?: number;
   pulau?: string;
+  wilayah?: string;
 };
 
 type Props = {
@@ -51,7 +52,7 @@ export default function BranchDetailModal({ open, onClose, branch, onEdit, onDel
                 <div>
                   <h2 className="text-2xl font-semibold text-gray-900">{branch.name}</h2>
                   <div className="text-sm text-gray-500 mt-1">
-                    {branch.daerah} {branch.pulau ? `• ${branch.pulau}` : ''}
+                    {branch.daerah} {branch.wilayah ? `• ${branch.wilayah}` : ''}
                   </div>
                   <div className="text-xs text-gray-400 mt-1">ID: {branch.id}</div>
                 </div>
