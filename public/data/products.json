@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "ACC Bed Baut Sakura",
+    "categoryId": 1,
+    "categoryName": "Accessories",
+    "type": "Material",
+    "uom": "pcs",
+    "description": "Accesories baut bed model Sakura"
+  },
+  {
+    "id": 2,
+    "title": "ACC Bed Lobang Angin",
+    "categoryId": 1,
+    "categoryName": "Accessories",
+    "type": "Material",
+    "uom": "pcs",
+    "description": "Accesories lobang angin untuk bed"
+  },
+  {
+    "id": 3,
+    "title": "ACC Sofa Engsel",
+    "categoryId": 1,
+    "categoryName": "Accessories",
+    "type": "Material",
+    "uom": "set",
+    "description": "Accessories engsel untuk sofa"
+  },
+  {
+    "id": 4,
+    "title": "ACK Stabil Kayu Guci",
+    "categoryId": 2,
+    "categoryName": "Accessories Kaki",
+    "type": "Material",
+    "uom": "pcs",
+    "description": "Accessories kaki stabil kayu model guci"
+  },
+  {
+    "id": 5,
+    "title": "KP SOFA BELUDRU CITRUS",
+    "categoryId": 7,
+    "categoryName": "Kain Polos Sofa",
+    "type": "Material",
+    "uom": "mtr",
+    "description": "Kain polos SOFA BELUDRU CITRUS dengan tekstur lembut dan warna cerah."
+  },
+  {
+    "id": 6,
+    "title": "FNT KASUR",
+    "categoryId": 16,
+    "categoryName": "Kasur",
+    "type": "Furniture",
+    "uom": "lbr",
+    "description": "FNT KASUR dengan tekstur lembut dan warna cerah."
+  }
+]
