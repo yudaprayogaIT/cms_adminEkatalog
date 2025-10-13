@@ -95,10 +95,6 @@ export default function ProductCatalog() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-xl font-semibold">Products</h2>
-          <div className="text-sm text-gray-500">Klik product untuk melihat varian</div>
-        </div>
 
         <div className="flex items-center gap-2">
           <button onClick={openAddProduct} className="px-3 py-2 bg-[#2563EB] text-white rounded-md text-sm">Add Product</button>
