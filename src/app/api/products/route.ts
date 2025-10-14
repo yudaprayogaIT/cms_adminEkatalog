@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
-const DATA_PATH = path.join(process.cwd(), "data", "products.json");
+const DATA_PATH = path.join(process.cwd(), "public", "data", "products.json");
 
 async function readFileSafe() {
   try {

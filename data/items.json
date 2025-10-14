@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "productId": 1,
+    "title": "ACC Bed Baut Sakura Besar 5 CM tes",
+    "item code": "0010010000107",
+    "detail": "Accesories baut bed model Sakura dengan ukuran besar 5 CM.",
+    "images": "/images/items/ACC BED BAUT SAKURA BESAR 5 CM.png",
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang"
+    ]
+  },
+  {
+    "id": 2,
+    "productId": 1,
+    "title": "ACC BED BAUT SAKURA BESAR 7 CM",
+    "item code": "0010010000044",
+    "detail": "Accesories baut bed model Sakura dengan ukuran besar 7 CM.",
+    "images": "/images/items/ACC BED BAUT SAKURA BESAR 7 CM.jpg",
+    "branches": [
+      4,
+      7,
+      12,
+      6
+    ]
+  }
+]

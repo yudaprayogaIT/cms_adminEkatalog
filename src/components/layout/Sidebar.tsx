@@ -114,7 +114,7 @@ export default function Sidebar() {
       </div>
 
       {/* nav groups */}
-      <nav className="flex-1 overflow-y-auto mt-3">
+      <nav className="flex-1 overflow-y-auto mt-3 ">
         <ul className="space-y-1 px-2">
           {/* Main menu items */}
           {MAIN_MENU.map((m) => {

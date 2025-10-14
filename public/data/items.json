@@ -8,19 +8,28 @@
     "category": "Accessories",
     "productName": "ACC Bed Baut Sakura",
     "detail": "Accesories baut bed model Sakura dengan ukuran besar 5 CM.",
-    "branches": ["Bogor", "Samarinda", "Kupang"],
+    "branches": [
+      "Medan",
+      "Semarang",
+      "Samarinda",
+      "Bogor"
+    ],
     "images": "/images/items/ACC BED BAUT SAKURA BESAR 5 CM.png"
   },
   {
     "id": 2,
     "productId": 1,
     "tipe": "Material",
-    "title": "ACC BED BAUT SAKURA BESAR 7 CM",
+    "title": "ACC BED BAUT SAKURA BESAR 7 CM tes",
     "item code": "0010010000044",
     "category": "Accessories",
     "productName": "ACC Bed Baut Sakura",
     "detail": "Accesories baut bed model Sakura dengan ukuran besar 7 CM.",
-    "branches": ["Bogor", "Sidoarjo", "Kupang"],
+    "branches": [
+      "Bogor",
+      "Sidoarjo",
+      "Kupang"
+    ],
     "images": "/images/items/ACC BED BAUT SAKURA BESAR 7 CM.jpg"
   },
   {
@@ -32,7 +41,11 @@
     "category": "Accessories",
     "productName": "ACC BED BAUT SAKURA",
     "detail": "Accesories baut bed model Sakura dengan ukuran kecil.",
-    "branches": ["Bogor", "Samarinda", "Kupang"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang"
+    ],
     "images": "/images/items/ACC BED BAUT SAKURA KECIL.jpg"
   },
   {
@@ -44,7 +57,12 @@
     "category": "Accessories",
     "productName": "ACC BED LOBANG ANGIN",
     "detail": "Acc bed lobang angin warna putih cream.",
-    "branches": ["Bogor", "Samarinda", "Palembang", "Kupang"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Palembang",
+      "Kupang"
+    ],
     "images": "/images/items/ACC BED LOBANG ANGIN PUTIH CREAM.jpg"
   },
   {
@@ -56,7 +74,12 @@
     "category": "Accessories",
     "productName": "ACC BED LOBANG ANGIN",
     "detail": "Acc bed lobang angin warna emas hitam.",
-    "branches": ["Bogor", "Samarinda", "Palembang", "Kupang"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Palembang",
+      "Kupang"
+    ],
     "images": "/images/items/ACC BED LOBANG ANGIN EMAS HITAM.jpeg"
   },
   {
@@ -68,7 +91,12 @@
     "category": "Accessories",
     "productName": "ACC BED LOBANG ANGIN",
     "detail": "Acc bed lobang angin warna putih biru.",
-    "branches": ["Bogor", "Samarinda", "Palembang", "Kupang"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Palembang",
+      "Kupang"
+    ],
     "images": "/images/items/ACC BED LOBANG ANGIN PUTIH BIRU.jpg"
   },
   {
@@ -80,7 +108,12 @@
     "category": "Accessories",
     "productName": "ACC SOFA ENGSEL",
     "detail": "Acc sofa engsel besar.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang"
+    ],
     "images": "/images/items/ACC SOFA ENGSEL BESAR.jpg"
   },
   {
@@ -92,7 +125,13 @@
     "category": "Accessories",
     "productName": "ACC SOFA ENGSEL",
     "detail": "Acc sofa engsel kecil.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten"
+    ],
     "images": "/images/items/ACC SOFA ENGSEL KECIL.jpg"
   },
   {
@@ -104,7 +143,16 @@
     "category": "Accessories",
     "productName": "ACC SOFA ENGSEL",
     "detail": "Acc sofa engsel headrest.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Palu"
+    ],
     "images": "/images/items/ACC SOFA ENGSEL HEADREST.jpeg"
   },
   {
@@ -116,7 +164,15 @@
     "category": "Accessories Kaki",
     "productName": "ACK STABIL KAYU GUCI",
     "detail": "Acc stabil kayu guci hitam.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan"
+    ],
     "images": "/images/items/ACK STABIL KAYU HITAM GUCI.png"
   },
   {
@@ -128,7 +184,16 @@
     "category": "Accessories Kaki",
     "productName": "ACK STABIL KAYU GUCI",
     "detail": "Acc stabil kayu guci maroon.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/ACK STABIL KAYU GUCI MAROON.jpeg"
   },
   {
@@ -140,7 +205,16 @@
     "category": "Kain Polos Sofa",
     "productName": "KP SOFA BELUDRU CITRUS",
     "detail": "Kain polos SOFA BELUDRU CITRUS dengan tekstur lembut dengan varian warna abu muda.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/KP SOFA BELUDRU CITRUS ABU MUDA.jpeg"
   },
   {
@@ -152,7 +226,16 @@
     "category": "Kain Polos Sofa",
     "productName": "KP SOFA BELUDRU CITRUS",
     "detail": "Kain polos SOFA BELUDRU CITRUS dengan tekstur lembut dengan varian warna biru tua.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/KP SOFA BELUDRU CITRUS BIRU TUA.jpeg"
   },
   {
@@ -164,7 +247,16 @@
     "category": "Kain Polos Sofa",
     "productName": "KP SOFA BELUDRU CITRUS",
     "detail": "Kain polos SOFA BELUDRU CITRUS dengan tekstur lembut dengan varian warna coklat coffee.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/KP SOFA BELUDRU CITRUS COKLAT COFFEE.png"
   },
   {
@@ -176,7 +268,16 @@
     "category": "Kain Polos Sofa",
     "productName": "KP SOFA BELUDRU CITRUS",
     "detail": "Kain polos SOFA BELUDRU CITRUS dengan tekstur lembut dengan varian warna hijau stabilo.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/KP SOFA BELUDRU CITRUS HIJAU STABILO.png"
   },
   {
@@ -188,8 +289,16 @@
     "category": "Kasur",
     "productName": "FNT KASUR",
     "detail": "FNT KASUR 200X140X30CM dengan tekstur lembut dan warna cerah.",
-    "branches": ["Bogor", "Samarinda", "Kupang", "Semarang", "Klaten", "Sidoarjo", "Medan", "Pontianak"],
+    "branches": [
+      "Bogor",
+      "Samarinda",
+      "Kupang",
+      "Semarang",
+      "Klaten",
+      "Sidoarjo",
+      "Medan",
+      "Pontianak"
+    ],
     "images": "/images/items/FNT KASUR 200X140X30CM.jpg"
   }
 ]
-

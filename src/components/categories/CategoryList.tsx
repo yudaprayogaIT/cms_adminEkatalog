@@ -178,7 +178,7 @@ export default function CategoryList() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-montserrat font-semibold">Categories</h2>
-          <div className="text-sm text-gray-500">Atur kategori & rules poin</div>
+          <div className="text-sm text-gray-500">Daftar Kategori dan Aturan Poin</div>
         </div>
         <div>
           <button onClick={handleAdd} className="px-3 py-2 bg-[#2563EB] text-white rounded-md text-sm">Add Category</button>
