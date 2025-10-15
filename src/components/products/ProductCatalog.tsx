@@ -183,10 +183,18 @@ export default function ProductCatalog() {
 
   return (
     <div>
-      <div className="flex items-center justify-end mb-6">
+      <div className="flex items-center justify-between mb-6">
+        <div className="mb-6">
+          <h1 className="text-base md:text-xl xl:text-2xl font-montserrat font-semibold">
+            Products
+          </h1>
+          <p className="text-[9px] md:text-sm text-gray-500">
+            Daftar produk — klik product untuk melihat varian
+          </p>
+        </div>
         <button
           onClick={openAddProduct}
-          className="px-3 py-2 bg-[#2563EB] text-white rounded-md text-sm"
+          className="px-2 py-1.5 md:px-3 md:py-2 bg-[#2563EB] text-white rounded-md text-[9px] md:text-sm"
         >
           Add Product
         </button>
@@ -194,7 +202,7 @@ export default function ProductCatalog() {
 
       <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
       >
         <AnimatePresence>
           {byProduct.map((p) => (

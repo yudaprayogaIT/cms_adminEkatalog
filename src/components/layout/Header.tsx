@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white shadow-sm h-16 flex items-center justify-between px-6 sticky top-0 z-20">
-      <h1 className="text-xl font-montserrat font-semibold text-gray-800">Dashboard Admin</h1>
+      <h1 className="text-base md:text-xl font-montserrat font-semibold text-gray-800">Dashboard Admin</h1>
 
       <div className="flex items-center gap-6">
         <div className="relative" ref={ref}>
@@ -37,14 +37,14 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -6, scale: 0.98 }}
                 transition={{ duration: 0.16 }}
-                className="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg ring-1 ring-black/5 z-30"
+                className="absolute right-0 mt-2 w-48 xl:w-72 bg-white rounded-md shadow-lg ring-1 ring-black/5 z-30"
               >
                 <div className="p-3">
                   <div className="text-sm font-medium">Notifications</div>
                   <div className="mt-2 space-y-2">
-                    <div className="text-xs text-gray-600">- Pesan system: ...</div>
-                    <div className="text-xs text-gray-600">- New member request</div>
-                    <div className="text-xs text-gray-600">- Promo activated</div>
+                    <div className="text-[9px] md:text-xs text-gray-600">- Pesan system: ...</div>
+                    <div className="text-[9px] md:text-xs text-gray-600">- New member request</div>
+                    <div className="text-[9px] md:text-xs text-gray-600">- Promo activated</div>
                   </div>
                 </div>
               </motion.div>
@@ -53,10 +53,10 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Image src="/images/userProfile.png" alt="avatar" width={36} height={36} className="rounded-full border border-gray-300" />
+          <Image src="/images/userProfile.png" alt="avatar" width={36} height={36} className="w-5 h-5 md:w-7 md:h-7 rounded-full border border-gray-300" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-gray-800">Admin</span>
-            <span className="text-xs text-gray-500">Superuser</span>
+            <span className="text-xs md:text-sm font-medium text-gray-800">Admin</span>
+            <span className="text-[9px] md:text-xs text-gray-500">Superuser</span>
           </div>
         </div>
       </div>

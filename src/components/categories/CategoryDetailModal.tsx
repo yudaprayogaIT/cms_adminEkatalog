@@ -35,7 +35,7 @@ export default function CategoryDetailModal({
 
           <motion.div initial={{ y: -12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -12, opacity: 0 }} transition={{ duration: 0.16 }} className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow p-6 overflow-auto">
             <div className="flex flex-col md:flex-row gap-6">
-              <div className="w-full md:w-1/3 bg-gray-50 rounded overflow-hidden h-56 flex items-center justify-center">
+              <div className="w-full md:w-1/3 bg-gray-50 rounded overflow-hidden h-75 md:h-58 flex items-center justify-center">
                 {category.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={category.image} alt={category.name} className="object-cover w-full h-full" />

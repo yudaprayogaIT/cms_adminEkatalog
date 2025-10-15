@@ -138,9 +138,9 @@ export default function AddCategoryModal({ open, onClose, initial }: { open: boo
 
               <div>
                 <label className="text-xs text-gray-600">Image (upload or path)</label>
-                <div className="flex items-center gap-3 mt-1">
-                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)} />
-                  <input value={imagePath} onChange={(e) => { setImagePath(e.target.value); setPreview(e.target.value || null); }} placeholder="/images/categories/..." className="flex-1 px-3 py-2 border rounded text-sm" />
+                <div className="flex flex-column md:flex-row items-center gap-3 mt-1">
+                  <input type="file" accept="image/*" className="" onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)}/>
+                  <input value={imagePath} onChange={(e) => { setImagePath(e.target.value); setPreview(e.target.value || null); }} placeholder="/images/categories/..." className="flex-1 px-3 py-2 hidden md:inline-block border rounded text-sm" />
                 </div>
                 <div className="text-xs text-gray-400 mt-1">Pilih file dari komputer atau masukkan path relatif dari folder <code>public/</code>.</div>
 

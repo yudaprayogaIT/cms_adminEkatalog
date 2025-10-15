@@ -212,19 +212,19 @@ export default function AddEditItemModal({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
           >
-            <h3 className="text-lg font-medium mb-3">
+            <h3 className="text-base md:text-lg font-medium mb-3">
               {initial?.id ? "Edit Item" : "Add New Item"}
             </h3>
 
             <form onSubmit={submit} className="grid gap-3">
               <div>
-                <label className="text-xs text-gray-600">Product</label>
+                <label className="text-[9px] md:text-xs text-gray-600">Product</label>
                 <select
                   value={productId as any}
                   onChange={(e) =>
                     setProductId(e.target.value ? e.target.value : "")
                   }
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 border rounded text-sm md:text-base"
                 >
                   <option value="">-- pilih product --</option>
                   {products.map((p) => (
@@ -236,41 +236,41 @@ export default function AddEditItemModal({
               </div>
 
               <div>
-                <label className="text-xs text-gray-600">Title</label>
+                <label className="text-[9px] md:text-xs text-gray-600">Title</label>
                 <input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 border rounded text-sm md:text-base"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-gray-600">Item code</label>
+                  <label className="text-[9px] md:text-xs text-gray-600">Item code</label>
                   <input
                     value={itemCode}
                     onChange={(e) => setItemCode(e.target.value)}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded text-sm md:text-base"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-600">Image path</label>
+                  <label className="text-[9px] md:text-xs text-gray-600">Image path</label>
                   <input
                     value={imagePath}
                     onChange={(e) => setImagePath(e.target.value)}
                     placeholder="/images/items/..."
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded text-sm md:text-base"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-gray-600">Detail</label>
+                <label className="text-[9px] md:text-xs text-gray-600">Detail</label>
                 <textarea
                   value={detail}
                   onChange={(e) => setDetail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 border rounded text-sm md:text-base"
                   rows={3}
                 />
               </div>
@@ -278,8 +278,8 @@ export default function AddEditItemModal({
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div>
-                    <label className="text-xs text-gray-600">Branches</label>
-                    <div className="text-xs text-gray-400">
+                    <label className="text-[9px] md:text-xs text-gray-600">Branches</label>
+                    <div className="text-[9px] md:text-xs text-gray-400">
                       Pilih branch yang tersedia untuk item ini
                     </div>
                   </div>
@@ -288,14 +288,14 @@ export default function AddEditItemModal({
                     <button
                       type="button"
                       onClick={selectAllShown}
-                      className="text-xs px-2 py-1 border rounded"
+                      className="text-[9px] md:text-xs px-2 py-1 border rounded"
                     >
                       Select all
                     </button>
                     <button
                       type="button"
                       onClick={clearAll}
-                      className="text-xs px-2 py-1 border rounded"
+                      className="text-[9px] md:text-xs px-2 py-1 border rounded"
                     >
                       Clear
                     </button>
@@ -323,7 +323,7 @@ export default function AddEditItemModal({
                         return (
                           <label
                             key={b.id}
-                            className="flex items-center gap-2 text-sm cursor-pointer select-none"
+                            className="flex items-center gap-2 text-xs md:text-sm cursor-pointer select-none"
                           >
                             <input
                               type="checkbox"
@@ -340,18 +340,18 @@ export default function AddEditItemModal({
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 mt-2">
+              <div className="flex justify-end gap-2 mt-2 text-sm md:text-base">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-3 py-2 rounded border"
+                  className="px-2 py-1 md:px-3 md:py-2 rounded border"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-3 py-2 rounded bg-[#2563EB] text-white"
+                  className="px-2 py-1 md:px-3 md:py-2 rounded bg-[#2563EB] text-white"
                 >
                   {saving
                     ? "Saving..."

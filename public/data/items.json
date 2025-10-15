@@ -20,7 +20,7 @@
     "id": 2,
     "productId": 1,
     "tipe": "Material",
-    "title": "ACC BED BAUT SAKURA BESAR 7 CM tes",
+    "title": "ACC BED BAUT SAKURA BESAR 7 CM",
     "item code": "0010010000044",
     "category": "Accessories",
     "productName": "ACC Bed Baut Sakura",
@@ -83,7 +83,7 @@
     "images": "/images/items/ACC BED LOBANG ANGIN EMAS HITAM.jpeg"
   },
   {
-    "id": 3,
+    "id": 6,
     "productId": 2,
     "tipe": "Material",
     "title": "ACC BED LOBANG ANGIN PUTIH BIRU",
@@ -100,7 +100,7 @@
     "images": "/images/items/ACC BED LOBANG ANGIN PUTIH BIRU.jpg"
   },
   {
-    "id": 4,
+    "id": 7,
     "productId": 3,
     "tipe": "Material",
     "title": "ACC SOFA ENGSEL BESAR",
@@ -117,7 +117,7 @@
     "images": "/images/items/ACC SOFA ENGSEL BESAR.jpg"
   },
   {
-    "id": 5,
+    "id": 8,
     "productId": 3,
     "tipe": "Material",
     "title": "ACC SOFA ENGSEL KECIL",
@@ -135,7 +135,7 @@
     "images": "/images/items/ACC SOFA ENGSEL KECIL.jpg"
   },
   {
-    "id": 6,
+    "id": 9,
     "productId": 3,
     "tipe": "Material",
     "title": "ACC SOFA ENGSEL HEADREST",
@@ -156,7 +156,7 @@
     "images": "/images/items/ACC SOFA ENGSEL HEADREST.jpeg"
   },
   {
-    "id": 7,
+    "id": 10,
     "productId": 4,
     "tipe": "Material",
     "title": "ACK STABIL KAYU GUCI HITAM",
@@ -176,7 +176,7 @@
     "images": "/images/items/ACK STABIL KAYU HITAM GUCI.png"
   },
   {
-    "id": 8,
+    "id": 11,
     "productId": 4,
     "tipe": "Material",
     "title": "ACK STABIL KAYU GUCI MAROON",
@@ -197,7 +197,7 @@
     "images": "/images/items/ACK STABIL KAYU GUCI MAROON.jpeg"
   },
   {
-    "id": 9,
+    "id": 12,
     "productId": 5,
     "tipe": "Material",
     "title": "KP SOFA BELUDRU CITRUS ABU MUDA",
@@ -218,7 +218,7 @@
     "images": "/images/items/KP SOFA BELUDRU CITRUS ABU MUDA.jpeg"
   },
   {
-    "id": 10,
+    "id": 13,
     "productId": 5,
     "tipe": "Material",
     "title": "KP SOFA BELUDRU CITRUS BIRU TUA",
@@ -239,7 +239,7 @@
     "images": "/images/items/KP SOFA BELUDRU CITRUS BIRU TUA.jpeg"
   },
   {
-    "id": 11,
+    "id": 14,
     "productId": 5,
     "tipe": "Material",
     "title": "KP SOFA BELUDRU CITRUS COKLAT COFFEE",
@@ -260,7 +260,7 @@
     "images": "/images/items/KP SOFA BELUDRU CITRUS COKLAT COFFEE.png"
   },
   {
-    "id": 12,
+    "id": 15,
     "productId": 5,
     "tipe": "Material",
     "title": "KP SOFA BELUDRU CITRUS HIJAU STABILO",
@@ -281,7 +281,7 @@
     "images": "/images/items/KP SOFA BELUDRU CITRUS HIJAU STABILO.png"
   },
   {
-    "id": 13,
+    "id": 16,
     "productId": 6,
     "tipe": "Furniture",
     "title": "FNT KASUR 200X140X30CM",
