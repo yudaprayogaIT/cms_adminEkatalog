@@ -7,13 +7,18 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import HomeIcon from '@mui/icons-material/Home';
 import {
+  AccountBalanceWallet,
   Apartment,
   AutoAwesomeMosaicRounded,
   CardGiftcard,
   ChatOutlined,
   Favorite,
+  Group,
+  Groups,
+  HomeWork,
   InventoryOutlined,
   ListAltOutlined,
+  Paid,
   Person,
   ShoppingBagOutlined,
 } from '@mui/icons-material';
@@ -40,10 +45,17 @@ const CATALOG_SUBMENU: MenuItem[] = [
   { label: 'Categories', href: '/categories', icon: <AutoAwesomeMosaicRounded /> },
 ];
 
+const CUSTOMER_SUBMENU: MenuItem[] = [
+  { label: 'Member', href: '/members', icon: <AccountBalanceWallet /> },
+  { label: 'Group', href: '/customerGroups', icon: <HomeWork /> },
+  // { label: 'Company', href: '/companies', icon: <AutoAwesomeMosaicRounded /> },
+];
+
 export default function Sidebar() {
   const pathname = usePathname() || '/';
-  const [collapsed, setCollapsed] = useState<boolean>(false); // true = collapsed/hidden for mobile; false = expanded/open
+  const [collapsed, setCollapsed] = useState<boolean>(false);
   const [catalogOpen, setCatalogOpen] = useState<boolean>(false);
+  const [customerOpen, setCustomerOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const collapsedWidth = 80;
@@ -274,6 +286,94 @@ export default function Sidebar() {
                     className="pl-2 pr-1 mt-2 overflow-hidden"
                   >
                     {CATALOG_SUBMENU.map((c) => {
+                      const active = isMenuActive(c.href);
+                      return (
+                        <li key={c.href} className="relative">
+                          <Link href={c.href} className="no-underline">
+                            <div className="relative">
+                              <motion.div
+                                layout
+                                transition={{ duration: 0.18 }}
+                                style={{ backgroundColor: active ? '#B11F23' : 'transparent' }}
+                                className={`absolute inset-0 rounded-md pointer-events-none`}
+                              />
+                              <div className={`flex items-center gap-3 rounded-md px-3 py-2 relative z-10 ml-3 ${collapsed ? 'justify-center' : ''}`}>
+                                <div className={`w-5 h-5 flex items-center justify-center ${active ? 'text-white' : 'text-gray-600'}`}>
+                                  {typeof c.icon === 'string' ? (
+                                    <Image src={c.icon} alt={c.label} width={18} height={18} />
+                                  ) : (
+                                    c.icon
+                                  )}
+                                </div>
+                                {!collapsed && <span className={`truncate text-sm 2xl:text-base ${active ? 'text-white' : 'text-gray-700'}`}>{c.label}</span>}
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
+
+            {/* separator */}
+            <div className="border-t border-gray-200 my-3" />
+
+            {/* Customer parent (dropdown) */}
+            <li className="relative">
+              {(() => {
+                const parentActive = CUSTOMER_SUBMENU.some((c) => isMenuActive(c.href));
+                return (
+                  <div className="relative">
+                    <button
+                      className={`w-full text-left relative`}
+                      onClick={() => setCustomerOpen((s) => !s)}
+                      aria-expanded={customerOpen}
+                    >
+                      <motion.div
+                        layout
+                        transition={{ duration: 0.18 }}
+                        style={{ backgroundColor: parentActive ? '#B11F23' : 'transparent' }}
+                        className={`absolute inset-0 rounded-md pointer-events-none`}
+                      />
+                      <div className={`flex items-center gap-3 rounded-md px-3 py-2 relative z-10 ${collapsed ? 'justify-center' : ''}`}>
+                        <div className={`w-5 h-5 2xl:w-6 2xl:h-6 flex items-center justify-center ${parentActive ? 'text-white' : 'text-gray-600'}`}>
+                          <Groups />
+                        </div>
+                        {!collapsed && <span className={`truncate text-sm 2xl:text-base ${parentActive ? 'text-white' : 'text-gray-700'}`}>Customer</span>}
+
+                        {/* chevron */}
+                        {!collapsed && (
+                          <div className="ml-auto">
+                            <motion.svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              initial={false}
+                              animate={{ rotate: catalogOpen ? 90 : 0 }}
+                              transition={{ duration: 0.18 }}
+                              className={`${parentActive ? 'text-white' : 'text-gray-400'}`}
+                            >
+                              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </motion.svg>
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  </div>
+                );
+              })()}
+              <AnimatePresence initial={false}>
+                {customerOpen && (
+                  <motion.ul
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="pl-2 pr-1 mt-2 overflow-hidden"
+                  >
+                    {CUSTOMER_SUBMENU.map((c) => {
                       const active = isMenuActive(c.href);
                       return (
                         <li key={c.href} className="relative">
