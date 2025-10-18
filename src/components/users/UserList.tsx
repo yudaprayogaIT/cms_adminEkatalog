@@ -12,8 +12,8 @@ type User = {
   cabang?: string;
   name: string;
   role: string;
-  nomortelepon?: string;
-  avatar?: string;
+  phone?: string;
+  profilePic?: string;
   gender?: "male" | "female";
   username?: string;
   password?: string;
@@ -220,8 +220,8 @@ export default function UserList() {
       if (roleFilter !== "All" && a.role !== roleFilter) return false;
       if (!q) return true;
       const inName = a.name.toLowerCase().includes(q);
-      const inPhone = a.nomortelepon
-        ? a.nomortelepon.toLowerCase().includes(q)
+      const inPhone = a.phone
+        ? a.phone.toLowerCase().includes(q)
         : false;
       const inCabang = a.cabang
         ? String(a.cabang).toLowerCase().includes(q)
@@ -353,8 +353,8 @@ export default function UserList() {
       name: lastDeleted.item.name,
       role: lastDeleted.item.role,
       cabang: lastDeleted.item.cabang,
-      nomortelepon: lastDeleted.item.nomortelepon,
-      avatar: lastDeleted.item.avatar,
+      phone: lastDeleted.item.phone,
+      profilePic: lastDeleted.item.profilePic,
       gender: lastDeleted.item.gender,
       username: lastDeleted.item.username,
       password: lastDeleted.item.password,
@@ -512,13 +512,13 @@ export default function UserList() {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {visible.map((a) => {
-          const avatarFallback =
+          const profilePicFallback =
             a.gender === "female"
               ? "/images/avatars/avatarwoman_placeholder.png"
               : "/images/avatars/avatarman_placeholder.png";
-          const avatarSrc =
-            a.avatar ??
-            avatarFallback ??
+          const profilePicSrc =
+            a.profilePic ??
+            profilePicFallback ??
             "/images/avatars/avatar-placeholder.png";
           return (
             <UserCard
@@ -527,8 +527,8 @@ export default function UserList() {
               name={a.name}
               role={a.role}
               cabang={a.cabang ?? ""}
-              nomortelepon={a.nomortelepon ?? ""}
-              avatar={avatarSrc}
+              phone={a.phone ?? ""}
+              profilePic={profilePicSrc}
               onDelete={() => promptDeleteUser(a)}
               onEdit={() => openEditModal(a)}
               onClick={() => openView(a)}

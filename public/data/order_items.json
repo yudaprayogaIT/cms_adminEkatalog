@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "order_id": 1001,
+    "product_id": 501,
+    "product_name": "Busa D-20 (100x200x5)",
+    "category_id": 4,
+    "quantity": 10,
+    "unit_price": 500000,
+    "subtotal_item": 5000000,
+    "category_point_rate": 6,
+    "points_earned_item": 60
+  },
+  {
+    "id": 2,
+    "order_id": 1001,
+    "product_id": 502,
+    "product_name": "Kawat Baja Z-Type",
+    "category_id": 9,
+    "quantity": 50,
+    "unit_price": 100000,
+    "subtotal_item": 5000000,
+    "category_point_rate": 3,
+    "points_earned_item": 150
+  }
+]

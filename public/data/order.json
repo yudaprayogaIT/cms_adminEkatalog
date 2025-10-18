@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1001,
+    "user_id": 25,
+    "branch_id": 4,
+    "order_date": "2025-10-10 09:30:00",
+    "order_status": "Completed",
+    "member_tier_at_order": "Silver",
+    "subtotal": 10000000,
+    "member_discount": 500000,
+    "total_amount": 9500000,
+    "total_points_earned": 210,
+    "shipping_address": "Jl. Mawar No. 5, Bogor",
+    "created_at": "2025-10-10 09:30:00",
+    "updated_at": "2025-10-10 11:00:00"
+  }
+]

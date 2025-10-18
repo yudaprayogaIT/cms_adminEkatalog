@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Bronze",
+    "min_points": 0,
+    "discount_rate": 0.02,
+    "inactivity_penalty_points": 8,
+    "inactivity_period_days": 60,
+    "penalty_frequency_days": 7,
+    "min_points_maintain": 1000
+  },
+  {
+    "id": 2,
+    "name": "Silver",
+    "min_points": 2500,
+    "discount_rate": 0.05,
+    "inactivity_penalty_points": 8,
+    "inactivity_period_days": 60,
+    "penalty_frequency_days": 7
+  },
+  {
+    "id": 3,
+    "name": "Gold",
+    "min_points": 5000,
+    "discount_rate": 0.1,
+    "inactivity_penalty_points": 10,
+    "inactivity_period_days": 60,
+    "penalty_frequency_days": 7
+  }
+]

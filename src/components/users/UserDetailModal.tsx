@@ -1,4 +1,3 @@
-// src/components/users/UserDetailModal.tsx
 "use client";
 
 import React from "react";
@@ -10,13 +9,22 @@ type User = {
   name: string;
   role: string;
   cabang?: string;
-  nomortelepon?: string;
-  avatar?: string;
+  phone?: string;
+  profilePic?: string;
   email?: string;
   gender?: "male" | "female" | string;
   username?: string;
-  password?: string;
-  // any other fields you may have
+  // optional address fields
+  address?: string;
+  city?: string;
+  postal_code?: string;
+  country?: string;
+  // membership fields (optional)
+  member_status?: string;
+  loyalty_points?: number;
+  member_since?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 type Props = {
@@ -36,11 +44,13 @@ export default function UserDetailModal({
 }: Props) {
   if (!user) return null;
 
-  const avatar =
-    user.avatar ??
+  const profilePic =
+    user.profilePic ??
     (user.gender === "female"
       ? "/images/avatars/avatarwoman_placeholder.png"
       : "/images/avatars/avatarman_placeholder.png");
+
+  const isCustomer = String(user.role).toLowerCase() === "customer";
 
   return (
     <AnimatePresence>
@@ -59,7 +69,7 @@ export default function UserDetailModal({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -12, opacity: 0 }}
             transition={{ duration: 0.16 }}
-            className="relative z-10 w-full max-w-2xl h-full max-h-95 bg-white rounded-2xl shadow-2xl overflow-hidden"
+            className={`relative z-10 w-full max-w-2xl h-full ${isCustomer ? "max-h-145" : "max-h-95"} bg-white rounded-2xl shadow-2xl overflow-hidden`}
             role="dialog"
             aria-modal="true"
             aria-label={`Detail ${user.name}`}
@@ -68,7 +78,7 @@ export default function UserDetailModal({
               {/* LEFT: image */}
               <div className="rounded-lg overflow-hidden bg-gray-100 flex flex-1 items-center justify-center h-72">
                 <Image
-                  src={avatar}
+                  src={profilePic}
                   width={1000}
                   height={1000}
                   alt={user.name}
@@ -119,16 +129,9 @@ export default function UserDetailModal({
                     <div>
                       <div className="text-xs text-gray-500">Phone</div>
                       <div className="text-sm text-gray-800">
-                        {user.nomortelepon ?? "-"}
+                        {user.phone ?? "-"}
                       </div>
                     </div>
-
-                    {/* <div>
-                      <div className="text-xs text-gray-500">Email</div>
-                      <div className="text-sm text-gray-800">
-                        {user.email ?? "-"}
-                      </div>
-                    </div> */}
 
                     <div>
                       <div className="text-xs text-gray-500">Gender</div>
@@ -136,6 +139,46 @@ export default function UserDetailModal({
                         {user.gender ?? "-"}
                       </div>
                     </div>
+
+                    {/* Show email if present */}
+                    <div>
+                      <div className="text-xs text-gray-500">Email</div>
+                      <div className="text-sm text-gray-800">
+                        {user.email ?? "-"}
+                      </div>
+                    </div>
+
+                    {/* If user is a Customer, show address block */}
+                    {isCustomer && (
+                      <div className="md:col-span-2">
+                        <div className="text-xs text-gray-500">Alamat</div>
+                        <div className="text-sm text-gray-800 mt-1">
+                          {user.address ? (
+                            <>
+                              <div>{user.address}{", "}
+                                {user.city ? `${user.city}` : ""} {user.postal_code ? ` ${user.postal_code}` : ""},
+                              {" "}{user.country ?? ""}</div>
+                            </>
+                          ) : (
+                            <div className="text-sm text-gray-400">-</div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* If customer has membership info show it */}
+                    {isCustomer && (user.member_status || typeof user.loyalty_points === 'number') && (
+                      <>
+                        <div>
+                          <div className="text-xs text-gray-500">Member Status</div>
+                          <div className="text-sm text-gray-800">{user.member_status ?? '-'}</div>
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500">Loyalty Points</div>
+                          <div className="text-sm text-gray-800">{user.loyalty_points ?? 0}</div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="mt-4">
@@ -146,25 +189,9 @@ export default function UserDetailModal({
                   </div>
                 </div>
 
-                <div className="mt-auto border-t pt-4 flex items-center justify-between gap-3">
-                  <div className="text-sm text-gray-500">Last updated: —</div>
-                  {/* <div className="flex items-center gap-2">
-                    <button
-                      onClick={onClose}
-                      className="px-3 py-2 rounded border text-sm"
-                    >
-                      Close
-                    </button>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className="px-3 py-2 rounded bg-[#2563EB] text-white text-sm"
-                    >
-                      Send Message
-                    </a>
-                  </div> */}
+                <div className="mt-auto border-t pt-4 flex flex-col items-start justify-between gap-1">
+                  <div className="text-sm text-gray-500">Created At: {user.createdAt ?? "-"}</div>
+                  <div className="text-sm text-gray-500">Last updated: {user.updatedAt ?? "-"}</div>
                 </div>
               </div>
             </div>
