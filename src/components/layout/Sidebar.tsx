@@ -49,7 +49,7 @@ const CATALOG_SUBMENU: MenuItem[] = [
 const CUSTOMER_SUBMENU: MenuItem[] = [
   { label: 'Member', href: '/members', icon: <AccountBalanceWallet /> },
   { label: 'Member Tiers', href: '/member-tiers', icon: <CurrencyExchange /> },
-  { label: 'Group', href: '/customerGroups', icon: <HomeWork /> },
+  { label: 'Group', href: '/memberGroups', icon: <HomeWork /> },
   // { label: 'Company', href: '/companies', icon: <AutoAwesomeMosaicRounded /> },
 ];
 

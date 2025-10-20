@@ -2,70 +2,134 @@
   {
     "user_id": 23,
     "user_name": "Tes Cowo",
-    "member_tier": "Bronze",
-    "loyalty_points": 50,
-    "branch_id": 7,
-    "branch_name": "Sidoarjo",
-    "member_status": "Active",
-    "member_since": "2025-10-15 00:00:00",
-    "last_activity_date": "2025-10-16 14:53:52",
     "is_phone_verified_otp": true,
-    "application_date": "2025-10-14 10:00:00",
-    "approved_rejected_date": "2025-10-15 00:00:00",
-    "approved_rejected_by_admin_id": 1,
-    "company_name": "PT Jaya Abadi Sidoarjo",
-    "company_address": "Jl. Raya Ketimang No. 12"
+    "companies": [
+      {
+        "company_name": "PT Jaya Abadi Sidoarjo",
+        "company_address": "Jl. Raya Ketimang No. 12",
+        "member_tier": "Bronze",
+        "loyalty_points": 50,
+        "branch_id": 7,
+        "branch_name": "Sidoarjo",
+        "member_status": "Active",
+        "member_since": "2025-10-15 00:00:00",
+        "last_activity_date": "2025-10-16 14:53:52",
+        "application_date": "2025-10-14 10:00:00",
+        "approved_rejected_date": "2025-10-15 00:00:00",
+        "approved_rejected_by_admin_id": 1,
+        "reject_reason": null
+      },
+      {
+        "company_name": "PT Anugerah Abadi Sidoarjo",
+        "company_address": "Jl. Raya Purnasudi No. 45",
+        "member_tier": "N/A",
+        "loyalty_points": null,
+        "branch_id": 7,
+        "branch_name": "Sidoarjo",
+        "member_status": "pending",
+        "member_since": null,
+        "last_activity_date": "2025-10-16 14:53:52",
+        "application_date": "2025-10-16 10:00:00",
+        "approved_rejected_date": null,
+        "approved_rejected_by_admin_id": null,
+        "reject_reason": null
+      }
+    ]
   },
   {
     "user_id": 25,
     "user_name": "Asep Suryawan",
-    "member_tier": "N/A",
-    "loyalty_points": null,
-    "branch_id": 1,
-    "branch_name": "Medan",
-    "member_status": "Rejected",
-    "member_since": null,
-    "last_activity_date": null,
     "is_phone_verified_otp": false,
-    "application_date": "2025-10-16 14:00:00",
-    "approved_rejected_date": "2025-10-17 09:00:00",
-    "approved_rejected_by_admin_id": 2,
-    "company_name": "CV Mandiri Proyek",
-    "company_address": "Jl Malingping Rt 018 Rw 032"
+    "companies": [
+      {
+        "company_name": "CV Mandiri Proyek",
+        "company_address": "Jl Malingping Rt 018 Rw 032",
+        "member_tier": "N/A",
+        "loyalty_points": null,
+        "branch_id": 1,
+        "branch_name": "Medan",
+        "member_status": "Rejected",
+        "member_since": null,
+        "last_activity_date": null,
+        "application_date": "2025-10-16 14:00:00",
+        "approved_rejected_date": "2025-10-17 09:00:00",
+        "approved_rejected_by_admin_id": 2,
+        "reject_reason": null
+      }
+    ]
   },
   {
     "user_id": 28,
     "user_name": "Fitri Nur",
-    "member_tier": "N/A",
-    "loyalty_points": null,
-    "branch_id": 3,
-    "branch_name": "Palembang",
-    "member_status": "pending",
-    "member_since": null,
-    "last_activity_date": "2025-10-16 15:16:13",
     "is_phone_verified_otp": false,
-    "application_date": "2025-10-15 08:00:00",
-    "approved_rejected_date": null,
-    "approved_rejected_by_admin_id": null,
-    "company_name": "PT Cepat Tanggap",
-    "company_address": "Jl Cendrawasih Selatan",
-    "reject_reason": null
+    "companies": [
+      {
+        "company_name": "PT Cepat Tanggap",
+        "company_address": "Jl Cendrawasih Selatan",
+        "member_tier": "N/A",
+        "loyalty_points": null,
+        "branch_id": 3,
+        "branch_name": "Palembang",
+        "member_status": "pending",
+        "member_since": null,
+        "last_activity_date": "2025-10-16 15:16:13",
+        "application_date": "2025-10-15 08:00:00",
+        "approved_rejected_date": null,
+        "approved_rejected_by_admin_id": null,
+        "reject_reason": null
+      }
+    ]
   },
   {
     "user_id": 31,
     "user_name": "Siska",
-    "member_tier": "N/A",
-    "loyalty_points": 0,
-    "branch_id": 12,
-    "branch_name": "Kupang",
-    "member_status": "approved",
-    "member_since": null,
-    "last_activity_date": null,
     "is_phone_verified_otp": false,
-    "application_date": "2025-10-15 08:00:00",
-    "approved_rejected_date": null,
-    "approved_rejected_by_admin_id": null,
-    "company_name": "PT Unggul Sejahtera",
-    "company_address": "Kp. Cipenjo Luis Rt 001 Rw 018"
+    "companies": [
+      {
+        "company_name": "PT Unggul Sejahtera",
+        "company_address": "Kp. Cipenjo Luis Rt 001 Rw 018",
+        "member_tier": "Silver",
+        "loyalty_points": 0,
+        "branch_id": 12,
+        "branch_name": "Kupang",
+        "member_status": "approved",
+        "member_since": "2025-10-16 08:20:14",
+        "last_activity_date": "2025-10-19 18:20:14",
+        "application_date": "2025-10-15 08:00:00",
+        "approved_rejected_date": "2025-10-16 08:20:14",
+        "approved_rejected_by_admin_id": 1,
+        "reject_reason": null
+      },
+      {
+        "company_name": "PT Berkah Abadi",
+        "company_address": "Kp. Sleman Raharjo Rt 001 Rw 018",
+        "member_tier": "N/A",
+        "loyalty_points": 0,
+        "branch_id": 12,
+        "branch_name": "Kupang",
+        "member_status": "pending",
+        "member_since": null,
+        "last_activity_date": null,
+        "application_date": "2025-10-15 08:00:00",
+        "approved_rejected_date": null,
+        "approved_rejected_by_admin_id": null,
+        "reject_reason": null
+      },
+      {
+        "company_name": "PT Sukses Bersahaja",
+        "company_address": "Jl. Setiawan Siregar Rt 012 Rw 011",
+        "member_tier": "N/A",
+        "loyalty_points": 0,
+        "branch_id": 9,
+        "branch_name": "Samarinda",
+        "member_status": "approved",
+        "member_since": "2025-10-20T06:29:19.706Z",
+        "last_activity_date": null,
+        "application_date": "2025-10-15 08:00:00",
+        "approved_rejected_date": "2025-10-20T06:29:19.705Z",
+        "approved_rejected_by_admin_id": 1,
+        "reject_reason": null
+      }
+    ]
   }
 ]

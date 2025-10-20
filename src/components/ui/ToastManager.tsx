@@ -1,31 +1,126 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-type Toast = { id: number; type: "success" | "error" | "info"; message: string };
-
-export default function ToastManager() {
-  const [toasts, setToasts] = useState<Toast[]>([]);
+export default function ConfirmActionModal({
+  open,
+  action,
+  targetName,
+  onCancel,
+  onConfirm,
+  defaultReason,
+  requireReason = false,
+}: {
+  open: boolean;
+  action: "approve" | "reject";
+  targetName?: string;
+  onCancel: () => void;
+  onConfirm: (reason?: string | null) => void | Promise<void>;
+  defaultReason?: string | null;
+  requireReason?: boolean;
+}) {
+  // hooks at top-level
+  const [reason, setReason] = useState<string>(defaultReason ?? "");
+  const [processing, setProcessing] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
-    function handler(ev: Event) {
-      const det = (ev as CustomEvent).detail as { type?: string; message?: string };
-      if (!det || !det.message) return;
-      const id = Date.now() + Math.floor(Math.random() * 999);
-      setToasts((s) => [...s, { id, type: (det.type as any) || "info", message: det.message! }]);
-      setTimeout(() => setToasts((s) => s.filter((t) => t.id !== id)), 4000);
+    if (open) {
+      setReason(defaultReason ?? "");
+      setProcessing(false);
+      setTouched(false);
+      setShake(false);
     }
-    window.addEventListener("ekatalog:toast", handler);
-    return () => window.removeEventListener("ekatalog:toast", handler);
-  }, []);
+  }, [open, defaultReason]);
+
+  if (!open) return null;
+
+  const title = action === "approve" ? "Konfirmasi Approve" : "Konfirmasi Reject";
+  const description =
+    action === "approve"
+      ? `Anda akan menyetujui aplikasi member dari "${targetName ?? "user"}". Lanjutkan?`
+      : requireReason
+      ? `Anda akan menolak aplikasi member dari "${targetName ?? "user"}". Alasan penolakan wajib diisi.`
+      : `Anda akan menolak aplikasi member dari "${targetName ?? "user"}". Mohon isi alasan penolakan (opsional).`;
+
+  const reasonRequiredForThisAction = action === "reject" && requireReason;
+  const reasonTrimmed = reason.trim();
+  const isReasonValid = !reasonRequiredForThisAction || reasonTrimmed.length > 0;
+
+  async function handleConfirm() {
+    if (reasonRequiredForThisAction && reasonTrimmed.length === 0) {
+      setTouched(true);
+      setShake(true);
+      window.setTimeout(() => setShake(false), 520);
+      return;
+    }
+
+    try {
+      setProcessing(true);
+      await Promise.resolve(onConfirm(action === "reject" ? (reasonTrimmed === "" ? null : reasonTrimmed) : undefined));
+    } catch (e) {
+      console.error("confirm action error", e);
+    } finally {
+      setProcessing(false);
+    }
+  }
 
   return (
-    <div className="fixed right-4 bottom-6 z-50 flex flex-col gap-2">
-      {toasts.map((t) => (
-        <div key={t.id} className={`min-w-[220px] px-4 py-2 rounded shadow text-sm ${t.type === "success" ? "bg-green-600 text-white" : t.type === "error" ? "bg-red-600 text-white" : "bg-gray-800 text-white"}`}>
-          {t.message}
+    <div className="fixed inset-0 z-60 flex items-center justify-center p-6">
+      <div className="absolute inset-0 bg-black/40" onClick={onCancel} aria-hidden="true" />
+
+      <div role="dialog" aria-modal="true" className="relative z-10 w-full max-w-lg bg-white rounded-lg shadow p-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-semibold">{title}</h3>
+            <p className="text-sm text-gray-600 mt-1">{description}</p>
+          </div>
+          <button onClick={onCancel} className="text-gray-600">Close</button>
         </div>
-      ))}
+
+        {action === "reject" && (
+          <div className="mt-4">
+            <label className="text-xs text-gray-600 flex items-center gap-1">
+              Alasan penolakan
+              {reasonRequiredForThisAction && <span className="text-red-600">*</span>}
+            </label>
+
+            <motion.div animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : { x: 0 }} transition={{ duration: 0.48 }} className="mt-1">
+              <textarea
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
+                onBlur={() => setTouched(true)}
+                className={`w-full border rounded px-3 py-2 text-sm ${touched && !isReasonValid ? "border-red-500" : ""}`}
+                rows={4}
+                placeholder="Tuliskan alasan penolakan..."
+                aria-invalid={!isReasonValid}
+                aria-required={reasonRequiredForThisAction}
+              />
+            </motion.div>
+
+            <AnimatePresence>
+              {touched && !isReasonValid && (
+                <motion.div key="reject-error" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }} className="text-xs text-red-600 mt-2">
+                  Alasan penolakan wajib diisi.
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
+        <div className="mt-4 flex justify-end gap-2">
+          <button onClick={onCancel} disabled={processing} className="px-4 py-2 border rounded">Batal</button>
+          <button
+            onClick={handleConfirm}
+            disabled={processing || (action === "reject" && reasonRequiredForThisAction && !isReasonValid)}
+            className={`px-4 py-2 rounded text-white ${action === "approve" ? "bg-green-600" : "bg-red-600"} ${processing ? "opacity-70 cursor-wait" : ""}`}
+          >
+            {processing ? "Processing..." : action === "approve" ? "Confirm Approve" : "Confirm Reject"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

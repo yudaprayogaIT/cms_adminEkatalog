@@ -11,6 +11,8 @@ export default function MemberCard({
   phone,
   profilePic,
   status,
+  company_name,
+  member_tier,
   onClick,
 }: {
   id?: number;
@@ -20,6 +22,8 @@ export default function MemberCard({
   phone?: string;
   profilePic?: string;
   status?: string;
+  company_name?: string;
+  member_tier?: string;
   onClick?: () => void;
 }) {
   return (
@@ -36,7 +40,7 @@ export default function MemberCard({
       <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white shadow-lg mb-4">
         <Image
           src={profilePic ?? "/images/avatars/avatarman_placeholder.png"}
-          alt={name}
+          alt={name ?? "avatar"}
           width={500}
           height={500}
           className="object-cover w-full h-full"
@@ -45,9 +49,11 @@ export default function MemberCard({
 
       <div className="text-lg font-medium text-gray-800">{name}</div>
       <div className="text-sm text-gray-400 mt-1">
-        {role} {cabang ? `- ${cabang}` : ""}
+        {company_name}
+        {/* {role} {cabang ? `- ${cabang}` : ""} */}
       </div>
-      <div className="text-sm text-gray-400 mt-2">{phone}</div>
+      <div className="text-sm text-gray-400 mt-2">{cabang} - {member_tier}</div>
+      {/* <div className="text-sm text-gray-400 mt-2">{phone}</div> */}
 
       {status && <div className="absolute top-3 right-3 text-xs px-2 py-1 rounded bg-gray-100">{status}</div>}
     </div>

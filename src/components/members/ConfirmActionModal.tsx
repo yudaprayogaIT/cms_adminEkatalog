@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ConfirmActionModal({
@@ -20,19 +20,17 @@ export default function ConfirmActionModal({
   defaultReason?: string | null;
   requireReason?: boolean;
 }) {
-  // hooks (top-level)
+  // hooks at top-level
   const [reason, setReason] = useState<string>(defaultReason ?? "");
   const [processing, setProcessing] = useState(false);
   const [touched, setTouched] = useState(false);
-  const [showError, setShowError] = useState(false); // keeps error text visible
-  const [shake, setShake] = useState(false); // triggers shake animation
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
     if (open) {
       setReason(defaultReason ?? "");
       setProcessing(false);
       setTouched(false);
-      setShowError(false);
       setShake(false);
     }
   }, [open, defaultReason]);
@@ -52,21 +50,16 @@ export default function ConfirmActionModal({
   const isReasonValid = !reasonRequiredForThisAction || reasonTrimmed.length > 0;
 
   async function handleConfirm() {
-    // validation: if required and empty, show error + shake
     if (reasonRequiredForThisAction && reasonTrimmed.length === 0) {
       setTouched(true);
-      setShowError(true);
-      // trigger a short shake animation
       setShake(true);
-      window.setTimeout(() => setShake(false), 500);
+      window.setTimeout(() => setShake(false), 520);
       return;
     }
 
     try {
       setProcessing(true);
-      await Promise.resolve(
-        onConfirm(action === "reject" ? (reasonTrimmed === "" ? null : reasonTrimmed) : undefined)
-      );
+      await Promise.resolve(onConfirm(action === "reject" ? (reasonTrimmed === "" ? null : reasonTrimmed) : undefined));
     } catch (e) {
       console.error("confirm action error", e);
     } finally {
@@ -94,12 +87,7 @@ export default function ConfirmActionModal({
               {reasonRequiredForThisAction && <span className="text-red-600">*</span>}
             </label>
 
-            {/* wrapper yang di-shake saat invalid */}
-            <motion.div
-              animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : { x: 0 }}
-              transition={{ duration: 0.45 }}
-              className="mt-1"
-            >
+            <motion.div animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : { x: 0 }} transition={{ duration: 0.48 }} className="mt-1">
               <textarea
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
@@ -112,17 +100,9 @@ export default function ConfirmActionModal({
               />
             </motion.div>
 
-            {/* error text: muncul dengan AnimatePresence */}
             <AnimatePresence>
               {touched && !isReasonValid && (
-                <motion.div
-                  key="reject-error"
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="text-xs text-red-600 mt-2"
-                >
+                <motion.div key="reject-error" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }} className="text-xs text-red-600 mt-2">
                   Alasan penolakan wajib diisi.
                 </motion.div>
               )}
@@ -135,7 +115,7 @@ export default function ConfirmActionModal({
           <button
             onClick={handleConfirm}
             disabled={processing || (action === "reject" && reasonRequiredForThisAction && !isReasonValid)}
-            className={`cursor-pointer px-4 py-2 rounded text-white ${action === "approve" ? "bg-green-600" : "bg-red-600"} ${processing ? "opacity-70 cursor-wait" : ""}`}
+            className={`px-4 py-2 rounded text-white ${action === "approve" ? "bg-green-600" : "bg-red-600"} ${processing ? "opacity-70 cursor-wait" : ""}`}
           >
             {processing ? "Processing..." : action === "approve" ? "Confirm Approve" : "Confirm Reject"}
           </button>
