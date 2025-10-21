@@ -118,14 +118,14 @@ export async function POST(req: Request) {
 
       // set status + meta
       if (action === "approve") {
-        company.member_status = "approved";
+        company.member_status = "Approved";
         company.approved_rejected_date = nowISO();
         company.approved_rejected_by_admin_id = adminId;
         company.reject_reason = null;
         // optionally set member_since if not set
         if (!company.member_since) company.member_since = nowISO();
       } else {
-        company.member_status = "rejected";
+        company.member_status = "Rejected";
         company.approved_rejected_date = nowISO();
         company.approved_rejected_by_admin_id = adminId;
         company.reject_reason = rejectReason ?? null;
@@ -167,7 +167,7 @@ export async function POST(req: Request) {
               loyalty_points: c.loyalty_points ?? null,
               branch_id: c.branch_id ?? null,
               branch_name: c.branch_name ?? null,
-              member_status: c.member_status ?? "pending",
+              member_status: c.member_status ?? "Pending",
               member_since: c.member_since ?? null,
               last_activity_date: c.last_activity_date ?? null,
               application_date: c.application_date ?? now,
@@ -183,7 +183,7 @@ export async function POST(req: Request) {
                 loyalty_points: body.loyalty_points ?? null,
                 branch_id: body.branch_id ?? null,
                 branch_name: body.branch_name ?? null,
-                member_status: body.member_status ?? "pending",
+                member_status: body.member_status ?? "Pending",
                 member_since: body.member_since ?? null,
                 last_activity_date: body.last_activity_date ?? null,
                 application_date: body.application_date ?? now,

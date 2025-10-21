@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const body = (await req.json()) ?? {};
     const { action, user_id: userId, admin_id: adminId, reject_reason } = body;
     if (!action || !userId) return new NextResponse("missing action or user_id", { status: 400 });
-    const allowed = ["approve", "reject"];
+    const allowed = ["Approve", "Reject"];
     if (!allowed.includes(action)) return new NextResponse("invalid action", { status: 400 });
 
     const list = await readData();
@@ -26,10 +26,10 @@ export async function POST(req: Request) {
 
     const now = new Date().toISOString();
 
-    if (action === "approve") {
+    if (action === "Approve") {
       list[idx] = {
         ...list[idx],
-        member_status: "approved",
+        member_status: "Approved",
         member_since: list[idx].member_since ?? now,
         approved_rejected_date: now,
         approved_rejected_by_admin_id: adminId ?? 1,
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     } else {
       list[idx] = {
         ...list[idx],
-        member_status: "rejected",
+        member_status: "Rejected",
         approved_rejected_date: now,
         approved_rejected_by_admin_id: adminId ?? 1,
         reject_reason: reject_reason ?? null,

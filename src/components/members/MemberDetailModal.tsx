@@ -5,7 +5,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import ConfirmActionModal from "./ConfirmActionModal";
 
-type User = { id: number; name: string; phone?: string; profilePic?: string | null; cabang?: string; role?: string; gender?: string; };
+type User = {
+  id: number;
+  name: string;
+  phone?: string;
+  profilePic?: string | null;
+  cabang?: string;
+  role?: string;
+  gender?: string;
+};
 
 type MemberRecord = {
   user_id: number;
@@ -22,7 +30,11 @@ type MemberRecord = {
   reject_reason?: string | null;
 };
 
-function makeKey(userId: number | string, branchId: number | string | null | undefined, companyName?: string | null) {
+function makeKey(
+  userId: number | string,
+  branchId: number | string | null | undefined,
+  companyName?: string | null
+) {
   const b = branchId ?? "no-branch";
   const name = (companyName ?? "")
     .toString()
@@ -45,16 +57,29 @@ export default function MemberDetailModal({
   onClose: () => void;
   user?: User | null;
   member?: MemberRecord | null;
-  onApprove?: (userId: number, branchId?: number | null) => void | Promise<void>;
-  onReject?: (userId: number, branchId?: number | null, reason?: string | null) => void | Promise<void>;
+  onApprove?: (
+    userId: number,
+    branchId?: number | null
+  ) => void | Promise<void>;
+  onReject?: (
+    userId: number,
+    branchId?: number | null,
+    reason?: string | null
+  ) => void | Promise<void>;
 }) {
   const [processing, setProcessing] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [confirmAction, setConfirmAction] = useState<"approve" | "reject" | null>(null);
+  const [confirmAction, setConfirmAction] = useState<
+    "approve" | "reject" | null
+  >(null);
 
   if (!user || !member) return null;
 
-  const profile = user.profilePic ?? (user.gender === "female" ? "/images/avatars/avatarwoman_placeholder.png" : "/images/avatars/avatarman_placeholder.png");
+  const profile =
+    user.profilePic ??
+    (user.gender === "female"
+      ? "/images/avatars/avatarwoman_placeholder.png"
+      : "/images/avatars/avatarman_placeholder.png");
 
   function openConfirm(action: "approve" | "reject") {
     setConfirmAction(action);
@@ -69,9 +94,13 @@ export default function MemberDetailModal({
     try {
       setProcessing(true);
       if (confirmAction === "approve") {
-        if (onApprove) await Promise.resolve(onApprove(user.id, member.branch_id ?? null));
+        if (onApprove)
+          await Promise.resolve(onApprove(user.id, member.branch_id ?? null));
       } else {
-        if (onReject) await Promise.resolve(onReject(user.id, member.branch_id ?? null, reason ?? null));
+        if (onReject)
+          await Promise.resolve(
+            onReject(user.id, member.branch_id ?? null, reason ?? null)
+          );
       }
       setConfirmOpen(false);
       onClose();
@@ -111,10 +140,18 @@ export default function MemberDetailModal({
             <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="col-span-1 flex flex-col items-center gap-3">
                 <div className="w-40 h-40 rounded overflow-hidden bg-gray-100">
-                  <Image src={profile} width={800} height={800} alt={user.name} className="object-cover w-full h-full" />
+                  <Image
+                    src={user.profilePic ?? "/images/avatars/avatarman_placeholder.png"}
+                    width={800}
+                    height={800}
+                    alt={user.name}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
                 <div className="text-lg font-semibold">{user.name}</div>
-                <div className="text-sm text-gray-500">{user.role} {user.cabang ? `• ${user.cabang}` : ""}</div>
+                <div className="text-sm text-gray-500">
+                  {user.role} {user.cabang ? `• ${user.cabang}` : ""}
+                </div>
                 <div className="text-sm text-gray-500">{user.phone}</div>
               </div>
 
@@ -123,33 +160,49 @@ export default function MemberDetailModal({
                 <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                   <div>
                     <div className="text-xs text-gray-500">Company</div>
-                    <div className="text-gray-800">{member.company_name ?? "-"}</div>
+                    <div className="text-gray-800">
+                      {member.company_name ?? "-"}
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500">Branch</div>
-                    <div className="text-gray-800">{member.branch_name ?? "-"}</div>
+                    <div className="text-gray-800">
+                      {member.branch_name ?? "-"}
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500">Tier</div>
-                    <div className="text-gray-800">{member.member_tier ?? "-"}</div>
+                    <div className="text-gray-800">
+                      {member.member_tier ?? "-"}
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500">Points</div>
-                    <div className="text-gray-800">{member.loyalty_points ?? 0}</div>
+                    <div className="text-gray-800">
+                      {member.loyalty_points ?? 0}
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500">Applied</div>
-                    <div className="text-gray-800">{member.application_date ?? "-"}</div>
+                    <div className="text-gray-800">
+                      {member.application_date ?? "-"}
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500">Status</div>
-                    <div className="text-gray-800">{member.member_status ?? "-"}</div>
+                    <div className="text-gray-800">
+                      {member.member_status ?? "-"}
+                    </div>
                   </div>
 
                   {member.reject_reason && (
                     <div className="md:col-span-2">
-                      <div className="text-xs text-gray-500">Alasan Penolakan</div>
-                      <div className="text-sm text-red-600 mt-1">{member.reject_reason}</div>
+                      <div className="text-xs text-gray-500">
+                        Alasan Penolakan
+                      </div>
+                      <div className="text-sm text-red-600 mt-1">
+                        {member.reject_reason}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -157,16 +210,33 @@ export default function MemberDetailModal({
                 <div className="mt-6 flex gap-2">
                   {String(member.member_status).toLowerCase() === "pending" && (
                     <>
-                      <button onClick={() => openConfirm("approve")} className="px-4 py-2 rounded border bg-green-50" disabled={processing}>
-                        {processing && confirmAction === "approve" ? "Processing..." : "Approve"}
+                      <button
+                        onClick={() => openConfirm("approve")}
+                        className="px-4 py-2 rounded border bg-green-50"
+                        disabled={processing}
+                      >
+                        {processing && confirmAction === "approve"
+                          ? "Processing..."
+                          : "Approve"}
                       </button>
-                      <button onClick={() => openConfirm("reject")} className="px-4 py-2 rounded border bg-red-50" disabled={processing}>
-                        {processing && confirmAction === "reject" ? "Processing..." : "Reject"}
+                      <button
+                        onClick={() => openConfirm("reject")}
+                        className="px-4 py-2 rounded border bg-red-50"
+                        disabled={processing}
+                      >
+                        {processing && confirmAction === "reject"
+                          ? "Processing..."
+                          : "Reject"}
                       </button>
                     </>
                   )}
 
-                  <button onClick={onClose} className="px-4 py-2 rounded border ml-auto">Close</button>
+                  <button
+                    onClick={onClose}
+                    className="px-4 py-2 rounded border ml-auto"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
@@ -175,7 +245,11 @@ export default function MemberDetailModal({
       )}
 
       <ConfirmActionModal
-        key={`confirm-${makeKey(user.id, member.branch_id, member.company_name)}-${confirmAction ?? "none"}`}
+        key={`confirm-${makeKey(
+          user.id,
+          member.branch_id,
+          member.company_name
+        )}-${confirmAction ?? "none"}`}
         open={confirmOpen}
         action={confirmAction ?? "approve"}
         targetName={user.name}
