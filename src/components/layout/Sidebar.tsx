@@ -22,6 +22,7 @@ import {
   Paid,
   Person,
   ShoppingBagOutlined,
+  WhatsApp,
 } from '@mui/icons-material';
 
 type MenuItem = { label: string; href: string; icon: React.ReactNode | string };
@@ -36,6 +37,7 @@ const MAIN_MENU: MenuItem[] = [
 
 const SECONDARY_MENU: MenuItem[] = [
   { label: 'Users', href: '/users', icon: <Person /> },
+  { label: 'WA Accounts', href: '/waAdmin', icon: <WhatsApp /> },
   { label: 'Branches', href: '/branches', icon: <Apartment /> },
   { label: 'To-Do', href: '/todo', icon: <ListAltOutlined /> },
 ];

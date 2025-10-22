@@ -75,11 +75,11 @@ export default function MemberDetailModal({
 
   if (!user || !member) return null;
 
-  const profile =
-    user.profilePic ??
-    (user.gender === "female"
-      ? "/images/avatars/avatarwoman_placeholder.png"
-      : "/images/avatars/avatarman_placeholder.png");
+  // const profile =
+  //   user.profilePic ??
+  //   (user.gender === "female"
+  //     ? "/images/avatars/avatarwoman_placeholder.png"
+  //     : "/images/avatars/avatarman_placeholder.png");
 
   function openConfirm(action: "approve" | "reject") {
     setConfirmAction(action);
@@ -95,11 +95,11 @@ export default function MemberDetailModal({
       setProcessing(true);
       if (confirmAction === "approve") {
         if (onApprove)
-          await Promise.resolve(onApprove(user.id, member.branch_id ?? null));
+          await Promise.resolve(onApprove(user!.id, member!.branch_id ?? null));
       } else {
         if (onReject)
           await Promise.resolve(
-            onReject(user.id, member.branch_id ?? null, reason ?? null)
+            onReject(user!.id, member!.branch_id ?? null, reason ?? null)
           );
       }
       setConfirmOpen(false);
