@@ -99,7 +99,7 @@ export default function WAAccountCard({
 
         <button
           aria-label="delete account"
-          className="ml-auto border border-orange-300 px-4 py-2 rounded-xl text-sm hover:bg-yellow-500 hover:text-white transition"
+          className="ml-auto border border-orange-300 cursor-pointer px-4 py-2 rounded-xl text-sm hover:bg-yellow-500 hover:text-white transition"
           onClick={() => onDelete(item.id)}
         >
           Delete
@@ -108,7 +108,7 @@ export default function WAAccountCard({
         {isConnected ? (
           <button
             aria-label="disconnect account"
-            className="border border-red-300 px-4 py-2 rounded-xl text-sm hover:bg-red-700 hover:text-white transition"
+            className="border border-red-300 cursor-pointer px-4 py-2 rounded-xl text-sm hover:bg-red-700 hover:text-white transition"
             onClick={() => onDisconnect(item.id)}
           >
             Disconnect
@@ -116,7 +116,7 @@ export default function WAAccountCard({
         ) : (
           <button
             aria-label="connect account"
-            className="border border-green-300 px-4 py-2 rounded-xl text-sm hover:bg-green-700 hover:text-white transition"
+            className="border border-green-300 cursor-pointer px-4 py-2 rounded-xl text-sm hover:bg-green-700 hover:text-white transition"
             onClick={() => onConnectClick(item)}
           >
             Connect
